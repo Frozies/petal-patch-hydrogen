@@ -1,20 +1,15 @@
 import {Link} from '@shopify/hydrogen/client';
 
-export default function Navigation({collections}) {
+export default function Navigation() {
   return (
-    <nav className="hidden lg:block text-center">
-      <ul className="md:flex items-center justify-center">
-        {collections.map((collection) => (
-          <li key={collection.id}>
-            <Link
-              to={`/collections/${collection.handle}`}
-              className="block p-4 hover:opacity-80"
-            >
-              {collection.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="flex justify-between items-center">
+      <Link>Weddings</Link>
+      <Link>Holidays</Link>
+      <Link>Plants & Succulents</Link>
+      <Link>Gifts</Link>
+      <Link>Occasions</Link>
+      <Link>Contact</Link>
+      <Link>About</Link>
+    </div>
   );
 }
