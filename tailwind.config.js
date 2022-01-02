@@ -9,10 +9,14 @@ module.exports = {
     colors: {
       'header-blue': '#8be0ff',
       'header-pink': '#ff8bb6',
+      white: '#ffffff',
     },
     fontFamily: {
       sansSerif: ['Laila', 'sans-serif'],
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwindcss-textshadow'),
+  ],
 };
