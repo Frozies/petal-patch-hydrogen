@@ -8,7 +8,7 @@ import React, {
 
 export const CartContext = createContext(null);
 
-export default function CartUIProvider({children}) {
+export default function CartUIProvider({children}: any) {
   const [open, setOpen] = useState(false);
 
   const openCart = useCallback(() => {
@@ -23,7 +23,7 @@ export default function CartUIProvider({children}) {
     setOpen(!open);
   }, [setOpen, open]);
 
-  const contextValue = useMemo(() => {
+  const contextValue: any = useMemo(() => {
     return {
       isCartOpen: open,
       openCart,

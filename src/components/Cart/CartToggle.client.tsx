@@ -1,14 +1,14 @@
 import {useCartUI} from './CartUIProvider.client';
 import CartIconWithItems from './CartIconWithItems.client';
 
-export default function CartToggle({handleClick}) {
+export default function CartToggle({handleClick}: any) {
   const cartUI = useCartUI();
 
   if (cartUI == null) {
     throw new Error('CartToggle must be a descendent of a CartUIProvider');
   }
 
-  const {isCartOpen, toggleCart} = cartUI;
+  const {isCartOpen, toggleCart}: any = cartUI;
 
   return (
     <button

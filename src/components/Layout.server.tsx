@@ -11,8 +11,8 @@ import Footer from './Footer.server';
 import {useCartUI} from './Cart/CartUIProvider.client';
 import Cart from './Cart/Cart.client';
 
-export default function Layout({children, hero}) {
-  const {data} = useShopQuery({
+export default function Layout({children, hero}: any) {
+  const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
       numCollections: 3,
@@ -22,9 +22,9 @@ export default function Layout({children, hero}) {
       staleWhileRevalidate: 60 * 10,
     },
   });
-  const {isCartOpen, closeCart} = useCartUI();
-  const collections = data ? flattenConnection(data.collections) : null;
-  const products = data ? flattenConnection(data.products) : null;
+  const {isCartOpen, closeCart}: any = useCartUI();
+  const collections: any = data ? flattenConnection(data.collections) : null;
+  const products: any = data ? flattenConnection(data.products) : null;
   const storeName = data ? data.shop.name : '';
 
   return (

@@ -5,7 +5,7 @@ import {FocusTrap} from '@headlessui/react';
 import MobileCurrencySelector from './MobileCurrencySelector.client';
 import OpenIcon from './OpenIcon';
 
-export default function MobileNavigation({collections, isOpen, setIsOpen}) {
+export default function MobileNavigation({collections, isOpen, setIsOpen}: any) {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
 
   return (
@@ -14,14 +14,14 @@ export default function MobileNavigation({collections, isOpen, setIsOpen}) {
         <button
           type="button"
           className="flex justify-center items-center w-7 h-full"
-          onClick={() => setIsOpen((previousIsOpen) => !previousIsOpen)}
+          onClick={() => setIsOpen((previousIsOpen: any) => !previousIsOpen)}
         >
           {isOpen ? <CloseIcon /> : <OpenIcon />}
         </button>
         {isOpen ? (
           <div className="absolute -left-0 top-20 w-full h-screen z-10 bg-gray-50 px-4 md:px-12 py-7">
             <ul>
-              {collections.map((collection) => (
+              {collections.map((collection: any) => (
                 <li className="border-b border-gray-200" key={collection.id}>
                   <Link
                     className="group py-5 text-gray-700 flex items-center justify-between"
@@ -62,7 +62,7 @@ function CloseIcon() {
   );
 }
 
-function ArrowRightIcon({className}) {
+function ArrowRightIcon({className}: any) {
   return (
     <svg
       className={className}

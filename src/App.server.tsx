@@ -10,11 +10,15 @@ import CartProvider from './components/Cart/CartProvider.client';
 import LoadingFallback from './components/LoadingFallback';
 
 export default function App({...serverState}) {
+  // @ts-ignore
   const pages = import.meta.globEager('./pages/**/*.server.[jt]sx');
+
 
   return (
     <Suspense fallback={<LoadingFallback />}>
+      {/*@ts-ignore*/}
       <ShopifyServerProvider shopifyConfig={shopifyConfig} {...serverState}>
+        {/*@ts-ignore*/}
         <CartProvider>
           <DefaultSeo />
           <Switch>

@@ -3,7 +3,7 @@ import {Image, Link} from '@shopify/hydrogen';
 import MoneyCompareAtPrice from './MoneyCompareAtPrice.client';
 import MoneyPrice from './MoneyPrice.client';
 
-export default function ProductCard({product}) {
+export default function ProductCard({product}: any) {
   const selectedVariant = product.variants.edges[0].node;
 
   if (selectedVariant == null) {

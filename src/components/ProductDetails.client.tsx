@@ -15,15 +15,15 @@ function ProductPriceMarkup() {
         priceType="compareAt"
         className="text-gray-500 line-through text-lg mr-2.5"
       >
-        {({amount, currencyNarrowSymbol}) => `${currencyNarrowSymbol}${amount}`}
+        {({amount, currencyNarrowSymbol}: any) => `${currencyNarrowSymbol}${amount}`}
       </Product.SelectedVariant.Price>
       <Product.SelectedVariant.Price className="text-gray-900">
-        {({currencyCode, amount, currencyNarrowSymbol}) =>
+        {({currencyCode, amount, currencyNarrowSymbol}: any) =>
           `${currencyCode} ${currencyNarrowSymbol}${amount}`
         }
       </Product.SelectedVariant.Price>
       <Product.SelectedVariant.UnitPrice className="text-gray-500">
-        {({currencyCode, amount, currencyNarrowSymbol, referenceUnit}) =>
+        {({currencyCode, amount, currencyNarrowSymbol, referenceUnit}: any) =>
           `${currencyCode} ${currencyNarrowSymbol}${amount}/${referenceUnit}`
         }
       </Product.SelectedVariant.UnitPrice>
@@ -32,7 +32,7 @@ function ProductPriceMarkup() {
 }
 
 function AddToCartMarkup() {
-  const {selectedVariant} = useProduct();
+  const {selectedVariant}: any = useProduct();
   const isOutOfStock = !selectedVariant.availableForSale;
 
   return (
@@ -104,8 +104,8 @@ function SizeChart() {
   );
 }
 
-export default function ProductDetails({product}) {
-  const initialVariant = flattenConnection(product.variants)[0];
+export default function ProductDetails({product}: any) {
+  const initialVariant: any = flattenConnection(product.variants)[0];
 
   return (
     <>
@@ -147,7 +147,7 @@ export default function ProductDetails({product}) {
             <div className="mt-8">
               <ProductOptions />
               <Product.Metafield namespace="my_fields" keyName="size_chart">
-                {({value}) => {
+                {({value}: any) => {
                   return value ? (
                     <a
                       href="#size-chart"
@@ -161,7 +161,7 @@ export default function ProductDetails({product}) {
               <AddToCartMarkup />
               <div className="flex items space-x-4">
                 <Product.Metafield namespace="my_fields" keyName="sustainable">
-                  {({value}) => {
+                  {({value}: any) => {
                     return value ? (
                       <span className="flex items-center mb-8">
                         <svg
@@ -190,7 +190,7 @@ export default function ProductDetails({product}) {
                   namespace="my_fields"
                   keyName="lifetime_warranty"
                 >
-                  {({value}) => {
+                  {({value}: any) => {
                     return value ? (
                       <span className="flex items-center mb-8">
                         <svg
@@ -220,7 +220,7 @@ export default function ProductDetails({product}) {
             {/* Product Description */}
             <Product.Description className="prose border-t border-gray-200 pt-6 text-black text-md" />
             <Product.Metafield namespace="my_fields" keyName="size_chart">
-              {({value}) => {
+              {({value}: any) => {
                 return value ? (
                   <div className="border-t border-gray-200">
                     <SizeChart />

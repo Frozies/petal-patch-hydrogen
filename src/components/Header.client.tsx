@@ -6,22 +6,11 @@ import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
 import Search from './Search.client';
 
-export default function Header({collections, storeName}) {
+export default function Header({collections, storeName}: any) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   return (
     <header role="banner">
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossOrigin="true"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Laila:wght@500;700&display=swap"
-        rel="stylesheet"
-      />
-
       <div
         className={`z-20 h-14 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-blue ${
           isMobileNavOpen ? '' : 'bg-opacity-95'

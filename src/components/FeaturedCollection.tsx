@@ -1,6 +1,6 @@
 import {Image, Link} from '@shopify/hydrogen';
 
-export default function FeaturedCollection({collection}) {
+export default function FeaturedCollection({collection}: any) {
   return collection ? (
     <div className="shadow-xl rounded-xl grid grid-cols-1 lg:grid-cols-2 items-center bg-white overflow-hidden">
       {collection.image ? (

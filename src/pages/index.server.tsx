@@ -13,7 +13,7 @@ import ProductCard from '../components/ProductCard';
 import Welcome from '../components/Welcome.server';
 
 export default function Index({country = {isoCode: 'US'}}) {
-  const {data} = useShopQuery({
+  const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,
@@ -21,11 +21,11 @@ export default function Index({country = {isoCode: 'US'}}) {
   });
 
   const collections = data ? flattenConnection(data.collections) : [];
-  const featuredProductsCollection = collections[0];
-  const featuredProducts = featuredProductsCollection
+  const featuredProductsCollection: any = collections[0];
+  const featuredProducts: any = featuredProductsCollection
     ? flattenConnection(featuredProductsCollection.products)
     : null;
-  const featuredCollection =
+  const featuredCollection: any =
     collections && collections.length > 1 ? collections[1] : collections[0];
 
   return (
@@ -49,7 +49,7 @@ export default function Index({country = {isoCode: 'US'}}) {
                 </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {featuredProducts.map((product) => (
+                {featuredProducts.map((product: any) => (
                   <div key={product.id}>
                     <ProductCard product={product} />
                   </div>

@@ -4,7 +4,7 @@ import {Listbox} from '@headlessui/react';
 
 export default function CurrencySelector() {
   const countries = useAvailableCountries();
-  const [selectedCountry, setSelectedCountry] = useCountry();
+  const [selectedCountry, setSelectedCountry]: any = useCountry();
 
   const setCountry = useCallback(
     (isoCode) => {
@@ -17,7 +17,7 @@ export default function CurrencySelector() {
 
   return (
     <div className="hidden lg:block">
-      <Listbox onChange={setCountry}>
+      <Listbox onChange={setCountry} value={false}>
         {({open}) => (
           <>
             <Listbox.Button className="font-medium text-sm h-8 p-2 flex items-center">
@@ -30,7 +30,7 @@ export default function CurrencySelector() {
                 <Listbox.Option
                   disabled
                   className="p-2 text-md text-left font-medium uppercase"
-                >
+                  value={false}>
                   Currency
                 </Listbox.Option>
                 {countries.map((country) => {
@@ -83,7 +83,7 @@ export function CheckIcon() {
   );
 }
 
-export function ArrowIcon({isOpen}) {
+export function ArrowIcon({isOpen}: any) {
   return (
     <svg
       className={`transition-transform duration-300 ${

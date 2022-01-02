@@ -20,6 +20,9 @@
     "@shopify/prettier-config": "^1.1.2",
     "@shopify/stylelint-plugin": "^10.0.1",
     "@tailwindcss/typography": "^0.4.1",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
     "autoprefixer": "^10.2.5",
     "cross-env": "^7.0.3",
     "eslint": "^7.31.0",
@@ -34,6 +37,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.1",
     "@shopify/hydrogen": "^0.8.0",
+    "@types/react-helmet": "^6.1.5",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "graphql-tag": "^2.12.4",

@@ -31,7 +31,7 @@ function NotFoundHero() {
 }
 
 export default function NotFound({country = {isoCode: 'US'}}) {
-  const {data} = useShopQuery({
+  const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,
@@ -44,7 +44,7 @@ export default function NotFound({country = {isoCode: 'US'}}) {
       numProductSellingPlans: 0,
     },
   });
-  const products = data ? flattenConnection(data.products) : [];
+  const products: any = data ? flattenConnection(data.products) : [];
 
   return (
     <Layout>
@@ -54,7 +54,7 @@ export default function NotFound({country = {isoCode: 'US'}}) {
           Products you might like
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {products.map((product) => (
+          {products.map((product: any) => (
             <div key={product.id}>
               <ProductCard product={product} />
             </div>

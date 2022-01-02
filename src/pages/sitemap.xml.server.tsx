@@ -1,7 +1,7 @@
 import {flattenConnection, useShopQuery} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-export default function Sitemap({response}) {
+export default function Sitemap({response}: any) {
   response.doNotStream();
 
   const {data} = useShopQuery({query: QUERY});
@@ -11,14 +11,14 @@ export default function Sitemap({response}) {
   return response.send(shopSitemap(data));
 }
 
-function shopSitemap(data) {
+function shopSitemap(data: any) {
   return `
     <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
     >
       ${flattenConnection(data.products)
-        .map((product) => {
+        .map((product: any) => {
           return `
           <url>
             <loc>

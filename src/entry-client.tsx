@@ -3,7 +3,7 @@ import {ShopifyProvider} from '@shopify/hydrogen/client';
 
 import shopifyConfig from '../shopify.config';
 
-function ClientApp({children}) {
+function ClientApp({children}: any) {
   return (
     <ShopifyProvider shopifyConfig={shopifyConfig}>{children}</ShopifyProvider>
   );

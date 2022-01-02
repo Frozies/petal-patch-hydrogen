@@ -1,18 +1,18 @@
 import {useProduct} from '@shopify/hydrogen/client';
 
 export default function ProductOptions() {
-  const {options, setSelectedOption, selectedOptions} = useProduct();
+  const {options, setSelectedOption, selectedOptions}: any = useProduct();
 
   return (
     <>
-      {options.map(({name, values}) => {
+      {options.map(({name, values}: any) => {
         return (
           <fieldset key={name} className="mt-8">
             <legend className="mb-4 text-xl font-medium text-gray-900">
               {name}
             </legend>
             <div className="flex items-center flex-wrap gap-4">
-              {values.map((value) => {
+              {values.map((value: any) => {
                 const checked = selectedOptions[name] === value;
                 const id = `option-${name}-${value}`;
 

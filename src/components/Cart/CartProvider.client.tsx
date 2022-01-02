@@ -3,7 +3,7 @@ import {CartProvider as ShopifyCartProvider} from '@shopify/hydrogen/client';
 
 import CartUIProvider, {useCartUI} from './CartUIProvider.client';
 
-export default function CartProvider({children, numCartLines}) {
+export default function CartProvider({children, numCartLines}: any) {
   return (
     <CartUIProvider>
       <Provider numCartLines={numCartLines}>{children}</Provider>
@@ -11,8 +11,8 @@ export default function CartProvider({children, numCartLines}) {
   );
 }
 
-function Provider({children, numCartLines}) {
-  const {openCart} = useCartUI();
+function Provider({children, numCartLines}: any) {
+  const {openCart}: any = useCartUI();
 
   const open = useCallback(() => {
     openCart();

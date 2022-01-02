@@ -1,6 +1,6 @@
 import {useServerState} from '@shopify/hydrogen/client';
 
-export default function LoadMoreProducts({startingCount}) {
+export default function LoadMoreProducts({startingCount}: any) {
   const {pending, serverState, setServerState} = useServerState();
 
   return (

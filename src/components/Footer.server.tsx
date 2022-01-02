@@ -1,6 +1,6 @@
 import {Link} from '@shopify/hydrogen';
 
-export default function Footer({collection, product}) {
+export default function Footer({collection, product}: any) {
   return (
     <footer role="contentinfo">
       <div className="relative bg-white border-t border-b border-black border-opacity-5">

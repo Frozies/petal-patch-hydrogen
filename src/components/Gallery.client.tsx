@@ -5,11 +5,11 @@ import {
 } from '@shopify/hydrogen/client';
 
 export default function Gallery() {
-  const {media, selectedVariant} = useProduct();
+  const {media, selectedVariant}: any = useProduct();
 
   const featuredMedia = selectedVariant.image || media[0].image;
   const featuredMediaSrc = featuredMedia.url.split('?')[0];
-  const galleryMedia = media.filter((med) => {
+  const galleryMedia = media.filter((med: any) => {
     if (
       med.mediaContentType === MODEL_3D_TYPE ||
       med.mediaContentType === VIDEO_TYPE
@@ -24,13 +24,14 @@ export default function Gallery() {
     return null;
   }
 
+  //
   return (
     <div
       className="gap-4 flex md:grid md:grid-cols-2 overflow-x-scroll no-scrollbar scroll-snap-x scroll-smooth h-[485px] md:h-auto place-content-start"
-      tabIndex="-1"
+      tabIndex={-1}
     >
       <SelectedVariantImage className="w-[80vw] md:w-full h-full md:h-auto object-cover object-center flex-shrink-0 md:flex-shrink-none snap-start md:col-span-2 border border-gray-200 rounded-lg" />
-      {galleryMedia.map((med) => {
+      {galleryMedia.map((med: any) => {
         let extraProps = {};
 
         if (med.mediaContentType === MODEL_3D_TYPE) {
@@ -38,17 +39,20 @@ export default function Gallery() {
         }
 
         return (
-          <MediaFile
-            tabIndex="0"
-            key={med.id || med.image.id}
-            className="w-[80vw] md:w-auto h-full md:h-auto object-cover object-center transition-all snap-start border border-gray-200 flex-shrink-0 rounded-lg"
-            media={med}
-            options={{
-              height: '485',
-              crop: 'center',
-            }}
-            {...extraProps}
-          />
+          /* @ts-ignore*/
+          <div
+            tabIndex={0}
+            className="w-[80vw] md:w-auto h-full md:h-auto object-cover object-center transition-all snap-start border border-gray-200 flex-shrink-0 rounded-lg">
+            <MediaFile
+              key={med.id || med.image.id}
+              media={med}
+              options={{
+                height: '485',
+                crop: 'center',
+              }}
+              {...extraProps}
+            />
+          </div>
         );
       })}
     </div>

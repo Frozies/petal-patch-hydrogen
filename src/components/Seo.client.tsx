@@ -1,7 +1,7 @@
 import {useShop, Helmet} from '@shopify/hydrogen/client';
 
-export default function Seo({shopName, product}) {
-  const {locale} = useShop();
+export default function Seo({shopName, product}: any) {
+  const {locale}: any = useShop();
   const lang = locale.split(/[-_]/)[0];
 
   if (product) {
@@ -15,6 +15,7 @@ export default function Seo({shopName, product}) {
     const url = typeof window === 'undefined' ? '' : window.location.href;
 
     return (
+      /*@ts-ignore*/
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -65,6 +66,7 @@ export default function Seo({shopName, product}) {
    * Useful for placing in the "main" <App> container.
    */
   return (
+    /*@ts-ignore*/
     <Helmet defaultTitle={shopName} titleTemplate={`%s - ${shopName}`}>
       <html lang={lang} />
       <meta property="og:site_name" content={shopName} />

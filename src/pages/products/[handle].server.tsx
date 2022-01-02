@@ -7,9 +7,9 @@ import NotFound from '../../components/NotFound.server';
 import Layout from '../../components/Layout.server';
 
 export default function Product({country = {isoCode: 'US'}}) {
-  const {handle} = useParams();
+  const {handle}: any = useParams();
 
-  const {data} = useShopQuery({
+  const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,

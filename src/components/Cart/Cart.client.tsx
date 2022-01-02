@@ -14,7 +14,7 @@ import CartIconWithItems from './CartIconWithItems.client';
 import {BUTTON_PRIMARY_CLASSES} from '../Button.client';
 
 export default function Cart() {
-  const {isCartOpen, closeCart} = useCartUI();
+  const {isCartOpen, closeCart}: any = useCartUI();
   const itemCount = useCartLinesTotalQuantity();
 
   return (
@@ -40,7 +40,7 @@ export default function Cart() {
 }
 
 function CartHeader() {
-  const {closeCart} = useCartUI();
+  const {closeCart}: any = useCartUI();
   return (
     <header className="border-b border-gray-300 bg-white py-3 px-6 flex justify-between items-center sticky top-0">
       <button type="button" onClick={closeCart}>
@@ -88,14 +88,14 @@ function CartItems() {
                 <CartLine.ProductTitle className="text-lg font-medium" />
               </Link>
               <CartLine.SelectedOptions as="ul" className="text-xs space-y-1">
-                {({name, value}) => (
+                {({name, value}: any) => (
                   <>
                     {name}: {value}
                   </>
                 )}
               </CartLine.SelectedOptions>
               <CartLine.Attributes as="ul" className="text-sm space-y-1">
-                {({key, value}) => (
+                {({key, value}: any) => (
                   <>
                     {key}: {value}
                   </>
@@ -215,7 +215,7 @@ function CartFooter() {
 }
 
 function CartEmpty() {
-  const {closeCart} = useCartUI();
+  const {closeCart}: any = useCartUI();
   return (
     <div className="p-7 flex flex-col">
       <p className="mb-4 text-lg text-gray-500 text-center">
