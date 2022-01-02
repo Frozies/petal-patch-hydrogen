@@ -6,25 +6,12 @@ module.exports = {
     extend: {},
   },
   theme: {
-    extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            hr: {
-              borderColor: theme('colors.gray.200'),
-              borderTopWidth: '1px',
-              marginTop: '2rem',
-              marginBottom: '2rem',
-            },
-            'ol > li::before': {
-              color: theme('colors.gray.900'),
-            },
-            'ul > li::before': {
-              backgroundColor: theme('colors.gray.900'),
-            },
-          },
-        },
-      }),
+    colors: {
+      'header-blue': '#8be0ff',
+      'header-pink': '#ff8bb6',
+    },
+    fontFamily: {
+      sansSerif: ['Laila', 'sans-serif'],
     },
   },
   plugins: [require('@tailwindcss/typography')],
