@@ -1,0 +1,16 @@
+{
+  "name": "Shopify GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "https://petal-patch-hydrogen.myshopify.com/api/2022-01/graphql.json",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Shopify-Storefront-Access-Token": "4e89e9ade6aeee978fa01f519523cdff"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
