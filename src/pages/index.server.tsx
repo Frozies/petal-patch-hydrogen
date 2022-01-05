@@ -20,6 +20,14 @@ export default function Index({country = {isoCode: 'US'}}) {
     },
   });
 
+  function Hero() {
+    return(
+      <div className={'top-0 w-full overflow-hidden'}>
+        <div className={"bg-hero-flowers w-full h-full mx-auto absolute bg-center"}/>
+      </div>
+    )
+  }
+
   const collections = data ? flattenConnection(data.collections) : [];
   const featuredProductsCollection: any = collections[0];
   const featuredProducts: any = featuredProductsCollection
@@ -29,44 +37,16 @@ export default function Index({country = {isoCode: 'US'}}) {
     collections && collections.length > 1 ? collections[1] : collections[0];
 
   return (
-    <Layout>
-      <div className="relative mb-12">
+    <Layout hero={<Hero/>}>
+      <div className={"relative mb-64"}>
         <Welcome />
-        <div className="bg-white p-12 shadow-xl rounded-xl mb-10">
-          {featuredProductsCollection ? (
-            <>
-              <div className="flex justify-between items-center mb-8 text-md font-medium">
-                <span className="text-black uppercase">
-                  {featuredProductsCollection.title}
-                </span>
-                <span className="hidden md:inline-flex">
-                  <Link
-                    to={`/collections/${featuredProductsCollection.handle}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    Shop all
-                  </Link>
-                </span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {featuredProducts.map((product: any) => (
-                  <div key={product.id}>
-                    <ProductCard product={product} />
-                  </div>
-                ))}
-              </div>
-              <div className="md:hidden text-center">
-                <Link
-                  to={`/collections/${featuredCollection.handle}`}
-                  className="text-blue-600"
-                >
-                  Shop all
-                </Link>
-              </div>
-            </>
-          ) : null}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+          {featuredProducts.map((product: any) => (
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
         </div>
-        <FeaturedCollection collection={featuredCollection} />
       </div>
     </Layout>
   );
@@ -76,7 +56,7 @@ const QUERY = gql`
   query indexContent(
     $country: CountryCode
     $numCollections: Int = 2
-    $numProducts: Int = 3
+    $numProducts: Int = 5
     $includeReferenceMetafieldDetails: Boolean = false
     $numProductMetafields: Int = 0
     $numProductVariants: Int = 250

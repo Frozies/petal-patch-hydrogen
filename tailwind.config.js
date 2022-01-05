@@ -14,6 +14,11 @@ module.exports = {
     fontFamily: {
       sansSerif: ['Laila', 'sans-serif'],
     },
+    extend: {
+      backgroundImage: {
+        'hero-flowers': "url('./images/welcome.jpg')",
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
