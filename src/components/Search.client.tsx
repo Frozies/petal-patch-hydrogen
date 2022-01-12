@@ -1,11 +1,40 @@
-export default function Search() {
+import gql from "graphql-tag";
+import { flattenConnection, useShopQuery } from "@shopify/hydrogen";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Simulate } from "react-dom/test-utils";
+import submit = Simulate.submit;
+import { useServerState } from "@shopify/hydrogen/client";
+
+export default function SearchClient() {
+  const [searchInput, setSearchInput] = useState<string>('');
+  const {setServerState} = useServerState();
+
+  /*const {data} = useShopQuery({
+    query: QUERY,
+    variables: {
+      searchQuery: "title:" + searchInput
+    }
+  })*/
+
+  useEffect(()=> {
+    console.log(searchInput)
+    setServerState('searchQuery', searchInput);
+    console.log("pending " + useServerState().pending)
+  }, )
+
+  //todo: create a modal that pops up when a search is entered. need to search color, flower, product. use the welcome
+  // query as a template. create a new component that pops up with search items below the search bar
+
   return (
     <div className="relative mx-auto text-gray-600 px-3 flex-grow">
       <input
         className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full"
         type="search"
         name="search"
-        placeholder="Search for product, flower, or color..."
+        placeholder="SearchClient for product, flower, or color..."
+        onChange={(event) => {
+          setSearchInput(event.target.value)
+        }}
       />
       <button type="submit" className="absolute right-0 top-0 mt-3 mr-6">
         <svg

@@ -6,8 +6,8 @@ import {
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import Header from './Header.client';
-import Footer from './Footer.server';
+import Header from './Header.server';
+import Footer from './Footer.client';
 import {useCartUI} from './Cart/CartUIProvider.client';
 import Cart from './Cart/Cart.client';
 

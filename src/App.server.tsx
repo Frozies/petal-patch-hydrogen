@@ -18,7 +18,7 @@ export default function App({...serverState}) {
     <Suspense fallback={<LoadingFallback />}>
       {/*@ts-ignore*/}
       <ShopifyServerProvider shopifyConfig={shopifyConfig} {...serverState}>
-        {/*@ts-ignore*/}
+
         <CartProvider>
           <DefaultSeo />
           <Switch>
