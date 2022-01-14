@@ -17,8 +17,8 @@ export default function Collection({
   country = {isoCode: 'US'},
   collectionProductCount = 24,
 }) {
-  const {handle} = useParams();
-  const {data} = useShopQuery({
+  const {handle}: any = useParams();
+  const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
       handle,
@@ -32,7 +32,7 @@ export default function Collection({
   }
 
   const collection = data.collection;
-  const products = flattenConnection(collection.products);
+  const products: any = flattenConnection(collection.products);
   const hasNextPage = data.collection.products.pageInfo.hasNextPage;
 
   return (
@@ -46,7 +46,7 @@ export default function Collection({
       </p>
 
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {products.map((product) => (
+        {products.map((product: any) => (
           <li key={product.id}>
             <ProductCard product={product} />
           </li>

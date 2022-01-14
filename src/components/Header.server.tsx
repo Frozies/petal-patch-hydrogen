@@ -4,7 +4,7 @@ import {Link} from '@shopify/hydrogen/client';
 import CartToggle from './Cart/CartToggle.client';
 import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
-import SearchModalServer from "./SearchModal.server";
+import SearchServServer from "./SearchServ.server";
 
 export default function Header({collections, storeName}: any) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function Header({collections, storeName}: any) {
             >
               {storeName}
             </Link>
-            <SearchModalServer/>
+            <SearchServServer/>
 
             <h1 className={'font-semibold text-2xl font-sansSerif px-2'}>
               Account
