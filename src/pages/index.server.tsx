@@ -12,7 +12,7 @@ import FeaturedCollection from '../components/FeaturedCollection';
 import ProductCard from '../components/ProductCard';
 import Welcome from '../components/Welcome.server';
 
-export default function Index({country = {isoCode: 'US'}}) {
+export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
@@ -37,7 +37,7 @@ export default function Index({country = {isoCode: 'US'}}) {
     collections && collections.length > 1 ? collections[1] : collections[0];
 
   return (
-    <Layout hero={<Hero/>}>
+    <Layout hero={<Hero/>} searchQuery={searchQuery}>
       <div className={"relative mb-64"}>
         <Welcome />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">

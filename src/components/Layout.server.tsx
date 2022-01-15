@@ -11,7 +11,7 @@ import Footer from './Footer.client';
 import {useCartUI} from './Cart/CartUIProvider.client';
 import Cart from './Cart/Cart.client';
 
-export default function Layout({children, hero}: any) {
+export default function Layout({children, hero, searchQuery}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
@@ -38,7 +38,7 @@ export default function Layout({children, hero}: any) {
         </a>
       </div>
       <div className="min-h-screen max-w-screen text-gray-700 font-sans">
-        <Header collections={collections} storeName={storeName} />
+        <Header collections={collections} storeName={storeName} searchQuery={searchQuery}/>
         <div>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
           <div
