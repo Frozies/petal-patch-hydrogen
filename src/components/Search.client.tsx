@@ -21,16 +21,19 @@ export default function SearchClient() {
       <input
         className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full"
         type="text"
-        name="searchQuery"
         placeholder="SearchClient for product, flower, or color..."
         onChange={(e) => setSearchQuery(e.target.value)}
         value={searchQuery}
         onKeyPress={(e) => { e.key === 'Enter' && onSubmit(e); }}
-        onSubmit={onSubmit}
+        onSubmit={(e: any) => {
+            onSubmit(e)
+        }}
       />
       <button type="button"
               className="absolute right-0 top-0 mt-3 mr-6"
-              onClick={onSubmit}>
+              onClick={(e: any) => {
+                  onSubmit(e)
+              }}>
         <svg
             className="text-gray-600 h-4 w-4 fill-current"
             xmlns="http://www.w3.org/2000/svg"

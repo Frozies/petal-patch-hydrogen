@@ -1,26 +1,31 @@
-/*
-import { useShopQuery } from "@shopify/hydrogen";
+import {flattenConnection, useShopQuery} from "@shopify/hydrogen";
 
 import gql from "graphql-tag";
 import SearchClient from "./Search.client";
 
-export default function SearchServServer({ searchQuery }: any) {
-  let searchFilter = "title:*" + searchQuery + "*"
+export default function Index({ searchQuery }: any) {
+  let searchFilter = "title:*" + searchQuery + "*";
 
-  const { data } = useShopQuery({
+  const { data }: any = useShopQuery({
     query: QUERY,
     variables: {
       searchQuery: searchFilter
     }
   });
 
-  const { products }: any = data;
+  const products: any = data && flattenConnection(data.products);
+  const firstProduct = products && products.length ? products[0].title : '';
+
+  const first = () => {
+    return (
+          console.table(firstProduct)
+    )
+  }
 
   return (
     <div>
       <SearchClient/>
-      <p>Your query was: {searchQuery}</p>
-
+      {first()}
     </div>
   );
 
@@ -38,16 +43,3 @@ const QUERY = gql`
         }
     }
 `;
-*/
-
-import SearchClient from "./Search.client";
-
-// @ts-ignore
-export default function Index({ searchQuery }) {
-  return (
-    <>
-      <SearchClient />
-      <p>Your query was: {searchQuery}</p>
-    </>
-  );
-}
