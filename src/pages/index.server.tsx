@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/FeaturedCollection';
 import ProductCard from '../components/ProductCard';
-import Welcome from '../components/Welcome.server';
+import Welcome from '../components/Welcome.client';
 
 export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
