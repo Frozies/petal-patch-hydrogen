@@ -10,7 +10,11 @@ export default function Index({ searchQuery }: any) {
     query: QUERY,
     variables: {
       searchQuery: searchFilter
-    }
+    }/*, todo: fill in cache
+    cache: {
+      maxAge: 60,
+      staleWhileRevalidate: 60 * 10,
+    },*/
   });
 
   const products: any = data && flattenConnection(data.products);
@@ -23,10 +27,10 @@ export default function Index({ searchQuery }: any) {
   }
 
   return (
-    <div>
+    <>
       <SearchClient/>
       {first()}
-    </div>
+    </>
   );
 
 }

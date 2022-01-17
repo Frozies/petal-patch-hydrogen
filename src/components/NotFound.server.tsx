@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 
 import Layout from './Layout.server';
 import Button from './Button.client';
-import ProductCard from './ProductCard';
+import ProductCardClient from './ProductCard.client';
 
 function NotFoundHero() {
   return (
@@ -56,7 +56,7 @@ export default function NotFound({country = {isoCode: 'US'}}) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {products.map((product: any) => (
             <div key={product.id}>
-              <ProductCard product={product} />
+              <ProductCardClient product={product} />
             </div>
           ))}
         </div>

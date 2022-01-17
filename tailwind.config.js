@@ -18,6 +18,9 @@ module.exports = {
       backgroundImage: {
         'hero-flowers': "url('./images/welcome.jpg')",
       },
+      translate: {
+        58: '14.5rem',
+      },
     },
   },
   plugins: [

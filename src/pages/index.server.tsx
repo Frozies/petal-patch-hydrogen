@@ -9,7 +9,7 @@ import gql from 'graphql-tag';
 
 import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/FeaturedCollection';
-import ProductCard from '../components/ProductCard';
+import ProductCardClient from '../components/ProductCard.client';
 import Welcome from '../components/Welcome.client';
 
 export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
@@ -22,7 +22,7 @@ export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
 
   function Hero() {
     return(
-      <div className={'top-0 w-full overflow-hidden'}>
+      <div className={'w-full overflow-hidden'}>
         <div className={"bg-hero-flowers w-full h-full mx-auto absolute bg-center"}/>
       </div>
     )
@@ -43,7 +43,7 @@ export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {featuredProducts.map((product: any) => (
             <div key={product.id}>
-              <ProductCard product={product} />
+              <ProductCardClient product={product} />
             </div>
           ))}
         </div>
