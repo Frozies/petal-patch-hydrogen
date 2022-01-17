@@ -20,16 +20,11 @@ export default function Index({ searchQuery }: any) {
   const products: any = data && flattenConnection(data.products);
   const firstProduct = products && products.length ? products[0].title : '';
 
-  const first = () => {
-    return (
-          console.table(firstProduct)
-    )
-  }
+  //todo Return a list of products to the client.
 
   return (
     <>
       <SearchClient/>
-      {first()}
     </>
   );
 

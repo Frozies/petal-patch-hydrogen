@@ -27,7 +27,7 @@ export default function ProductCardClient({product}: any) {
       >
         <AnimateHeight
             height={height.height}
-            className="rounded-lg border-2 border-gray-200 bg-white mb-2 relative object-cover w-auto">
+            className="rounded-lg border border-b bg-white mb-2 relative object-cover w-auto">
 
           {/*IN STOCK*/}
             {selectedVariant.image ? (
