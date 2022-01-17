@@ -22,9 +22,7 @@ export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
 
   function Hero() {
     return(
-      <div className={'w-full overflow-hidden'}>
-        <div className={"bg-hero-flowers w-full h-full mx-auto absolute bg-center"}/>
-      </div>
+        <div className={"bg-hero-flowers w-full h-full bg-cover bg-center mx-auto absolute"}/>
     )
   }
 
