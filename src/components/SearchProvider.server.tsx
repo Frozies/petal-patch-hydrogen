@@ -25,6 +25,7 @@ export default function Index({ searchQuery }: any) {
   return (
     <>
       <SearchClient/>
+      {console.log(firstProduct)}
     </>
   );
 

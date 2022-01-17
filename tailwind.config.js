@@ -20,6 +20,7 @@ module.exports = {
       },
       translate: {
         58: '14.5rem',
+        61: '15.25rem',
       },
     },
   },

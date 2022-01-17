@@ -51,7 +51,7 @@ export default function Layout({children, hero, searchQuery}: any) {
         </div>
         <main role="main" id="mainContent" className="relative bg-gray-50">
           {hero}
-          <div className="mx-auto max-w-7xl p-4 md:py-5 md:px-8">
+          <div className="mx-auto max-w-7xl px-4 pt-4 pb-36 ">
             {children}
           </div>
         </main>

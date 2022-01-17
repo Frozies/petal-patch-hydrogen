@@ -7,12 +7,23 @@ import MoneyPrice from './MoneyPrice.client';
 export default function ProductCardClient({product}: any) {
   const selectedVariant = product.variants.edges[0].node;
 
-  const [height, setHeight] = useState({height: 224, isOpen: false});
+  const [height, setHeight] = useState({height: 272, isOpen: true} );
 
 
   if (selectedVariant == null) {
     return null;
   }
+
+  /*TODO:
+  * New item icon:
+  * selectedVariant.publishedAt
+  *
+  * Discounted item icon:
+  * selectedVariant.compareAtPriceV2
+  *
+  * Top Seller Icon:
+  *
+  * */
 
   return (
     <div className="text-md mb-4 absolute items-center justify-center w-56 pb-10">
@@ -49,17 +60,17 @@ export default function ProductCardClient({product}: any) {
           <span className="text-black font-semibold mb-0.5 absolute w-full text-center translate-y-56">{product.title}</span>
 
           {/*PRICE*/}
-          <div className="flex text-black font-semibold mb-0.5 absolute w-full text-center translate-y-60">
-            {selectedVariant.compareAtPriceV2 && (
+          {selectedVariant?.availableForSale && (
+            <div className="flex translate-y-61 text-center">
+              {selectedVariant.compareAtPriceV2 && (
                 <MoneyCompareAtPrice money={selectedVariant.compareAtPriceV2} />
-            )}
-            <MoneyPrice money={selectedVariant.priceV2} />
-          </div>
-
-
+              )}
+              <MoneyPrice money={selectedVariant.priceV2} />
+            </div>
+          )}
             {/*OUT OF STOCK*/}
             {!selectedVariant?.availableForSale && (
-              <div className="absolute top-3 left-3 rounded-3xl text-xs bg-black text-white py-3 px-4">
+              <div className="text-black font-semibold mb-0.5 w-full text-center translate-y-61">
                 Out of stock
               </div>
             )}
