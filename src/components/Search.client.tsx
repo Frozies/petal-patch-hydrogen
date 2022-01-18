@@ -38,28 +38,21 @@ export default function SearchClient() {
     toggleOverlay(false)
   };
 
-  const showOverlay = (overlay: boolean) => {
-    if(overlay) return (
-      <div
-        id={"searchOverlay"}
-        className={`z-auto fixed w-full h-full top-0 left-0 flex items-center justify-center w-screen h-screen bg-black opacity-60`}
-      />
-    )
-    if(!overlay) return (
-      <div
-        id={"searchOverlay"}
-        className={`z-20 fixed w-full h-full top-0 left-0 flex items-center justify-center w-screen h-screen bg-black opacity-0`}
-      />
-    )
-  }
-
+  // todo: every link needs a hover border or some change on hover
   return (
       <>
-        {showOverlay(overlay)}
-        <form ref={ref} className="relative mx-auto zx text-gray-600 px-3 flex-grow"
+        <div
+            id={"searchOverlay"}
+            className={`ease-in-out transition-all duration-300 fixed w-full h-full top-0 left-0 flex items-center justify-center w-screen h-screen bg-black ${
+                overlay ? 'opacity-60 z-[-1]' : 'opacity-0 pointer-events-none'
+            }`}
+        />
+        <form ref={ref} className="relative mx-auto text-gray-600 px-3 flex-grow"
         >
           <input
-            className="border-2 relative z-50 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full"
+            className={`relative z-50  bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full ${
+              overlay ? 'border-header-pink border-4' : 'border-gray-300 border-2'
+            }`}
             type="text"
             placeholder="Search for product, flower, or color..."
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -74,8 +67,9 @@ export default function SearchClient() {
                   onClick={(e: any) => {
                     onSubmit(e)
                   }}>
+            {/*TODO: SVG is now gonee*/}
             <svg
-              className="text-gray-600 h-4 w-4 fill-current"
+              className="text-gray-600 h-4 w-4 fill-current relative z-50 "
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
               x="0px"

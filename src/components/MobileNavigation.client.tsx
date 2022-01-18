@@ -9,7 +9,7 @@ export default function MobileNavigation({collections, isOpen, setIsOpen}: any) 
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
 
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden relative z-50 ">
       <OpenFocusTrap>
         <button
           type="button"

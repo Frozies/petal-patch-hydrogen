@@ -30,7 +30,7 @@ export default function Layout({children, hero, searchQuery}: any) {
 
   return (
     <LocalizationProvider>
-      <div className="absolute top-0 left-0">
+      <div className="relative top-0 left-0">
         <a
           href="#mainContent"
           className="p-4 focus:block sr-only focus:not-sr-only"
@@ -38,7 +38,7 @@ export default function Layout({children, hero, searchQuery}: any) {
           Skip to content
         </a>
       </div>
-      <div className="min-h-screen max-w-screen text-gray-700 font-sans relative z-50">
+      <div className="min-h-screen max-w-screen text-gray-700 font-sans relative">
         <Header collections={collections} storeName={storeName} searchQuery={searchQuery}/>
         <div>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
