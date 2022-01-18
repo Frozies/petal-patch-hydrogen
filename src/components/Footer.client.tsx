@@ -1,4 +1,4 @@
-import {Link} from '@shopify/hydrogen';
+import {Link} from '@shopify/hydrogen/client';
 
 export default function Footer({collection, product}: any) {
   return (

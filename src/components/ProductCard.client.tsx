@@ -1,4 +1,4 @@
-import {Image, Link} from '@shopify/hydrogen';
+import {Image, Link} from '@shopify/hydrogen/client';
 import {useState} from 'react';
 import AnimateHeight from 'react-animate-height';
 import MoneyCompareAtPrice from './MoneyCompareAtPrice.client';
