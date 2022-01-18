@@ -9,6 +9,7 @@ module.exports = {
     colors: {
       'header-blue': '#8be0ff',
       'header-pink': '#ff8bb6',
+      black: '#000',
       white: '#ffffff',
     },
     fontFamily: {

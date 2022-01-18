@@ -12,12 +12,13 @@ export default function Header({collections, storeName, searchQuery}: any) {
   return (
     <header role="banner">
       <div
-        className={`z-20 h-14 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-blue ${
+        className={` h-14 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-blue relative z-50
+         ${
           isMobileNavOpen ? '' : 'bg-opacity-95'
         }`}
       >
-        <div className="h-full flex flex-row lg:flex-col place-content-around">
-          <div className="text-center w-full flex justify-between align-middle items-center header">
+        <div className="h-full flex flex-row lg:flex-col place-content-around z-50 relative">
+          <div className="text-center w-full flex justify-between align-middle items-center header z-50 relative">
             <MobileNavigation
               collections={collections}
               isOpen={isMobileNavOpen}
@@ -44,9 +45,9 @@ export default function Header({collections, storeName, searchQuery}: any) {
         </div>
       </div>
 
-      <div className="hidden lg:block">
+      <div className="hidden lg:block z-50 relative">
         <div
-          className={`relative z-20 h-10 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-pink ${
+          className={`relative z-50 h-10 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-pink ${
             isMobileNavOpen ? 'hidden' : 'bg-opacity-95'
           }`}
         >
