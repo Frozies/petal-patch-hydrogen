@@ -10,6 +10,7 @@ export default function ProductCardClient({product}: any) {
   const [timeOut, setTimeOut] = useState(false);
   const [height, setHeight] = useState({height: 224, isOpen: false});
 
+  //Timeout animation for homepage visit to nudge the user to hover over the product card to show them the pricing
     setTimeout(() => {
         if(!timeOut) {
             setHeight( {height: 272, isOpen: true} );
@@ -65,7 +66,7 @@ export default function ProductCardClient({product}: any) {
               bg-cover
               object-center
               object-contain
-              pb-2"
+              p-2"
               image={selectedVariant.image}
             />
           ) : null}

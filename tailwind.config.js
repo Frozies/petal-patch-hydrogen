@@ -10,10 +10,14 @@ module.exports = {
       'header-blue': '#8be0ff',
       'header-pink': '#ff8bb6',
       black: '#000',
-      white: '#ffffff',
+      white: '#fff',
     },
     fontFamily: {
       sansSerif: ['Laila', 'sans-serif'],
+    },
+    borderWidth: {
+      2: '2px',
+      3: '3px',
     },
     extend: {
       backgroundImage: {

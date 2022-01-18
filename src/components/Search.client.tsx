@@ -43,15 +43,15 @@ export default function SearchClient() {
       <>
         <div
             id={"searchOverlay"}
-            className={`ease-in-out transition-all duration-300 fixed w-full h-full top-0 left-0 flex items-center justify-center w-screen h-screen bg-black ${
-                overlay ? 'opacity-60 z-[-1]' : 'opacity-0 pointer-events-none'
+            className={`z-[-1] ease-in-out transition-all duration-300 fixed w-full h-full top-0 left-0 flex items-center justify-center w-screen h-screen bg-black ${
+                overlay ? 'opacity-60' : 'opacity-0 pointer-events-none'
             }`}
         />
         <form ref={ref} className="relative mx-auto text-gray-600 px-3 flex-grow"
         >
           <input
             className={`relative z-50  bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full ${
-              overlay ? 'border-header-pink border-4' : 'border-gray-300 border-2'
+              overlay ? 'border-header-pink border-2' : 'border-gray-300 border-2'
             }`}
             type="text"
             placeholder="Search for product, flower, or color..."
