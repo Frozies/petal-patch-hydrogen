@@ -9,9 +9,7 @@ import NotFound from './components/NotFound.server';
 import CartProvider from './components/Cart/CartProvider.client';
 import LoadingFallback from './components/LoadingFallback';
 
-export default function App({...serverState}) {
-  // @ts-ignore
-  const pages = import.meta.globEager('./pages/**/*.server.[jt]sx');
+export default function App({log, pages, ...serverState}: any) {
 
   return (
     <Suspense fallback={<LoadingFallback />}>
@@ -25,6 +23,7 @@ export default function App({...serverState}) {
               pages={pages}
               serverState={serverState}
               fallback={<NotFound />}
+              log={log}
             />
           </Switch>
         </CartProvider>

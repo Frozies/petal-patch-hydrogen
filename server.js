@@ -1,5 +1,6 @@
 // @ts-check
 const fs = require('fs');
+const bodyParser = require('body-parser');
 const path = require('path');
 const express = require('express');
 
@@ -19,11 +20,13 @@ async function createServer() {
     }),
   );
 
+  app.use('*', bodyParser.raw({type: '*/*'}));
+
   app.use(
     '*',
     hydrogenMiddleware({
       getServerEntrypoint: () =>
-        require('./dist/server/entry-server.js').default,
+        require('./dist/server/entry-server.jsx').default,
       indexTemplate: indexProd,
     }),
   );

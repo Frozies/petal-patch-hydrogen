@@ -26,7 +26,7 @@ export default function Header({collections, storeName, searchQuery}: any) {
               setIsOpen={setIsMobileNavOpen}
             />
             <Link
-              className="relative z-50 font-sansSerif text-4xl font-semibold basis-1/2"
+              className="relative z-50 font-sansSerif text-4xl font-semibold lg:basis-50"
               to="/"
             >
               {storeName}

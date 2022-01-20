@@ -8,6 +8,9 @@ import {
   BUTTON_SECONDARY_CLASSES,
 } from './Button.client';
 
+/**
+ * A client component that tracks a selected variant and/or selling plan state, as well as callbacks for modifying the state
+ */
 function ProductPriceMarkup() {
   return (
     <div className="flex md:flex-col items-end font-semibold text-lg md:items-start md:mb-4">
