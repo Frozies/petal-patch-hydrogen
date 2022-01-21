@@ -12,7 +12,7 @@ import FeaturedCollection from '../components/FeaturedCollection';
 import ProductCardClient from '../components/ProductCard.client';
 import Welcome from '../components/Welcome.client';
 
-export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
+export default function Index({search, country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
@@ -20,6 +20,7 @@ export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
     },
   });
 
+  //todo: I can move this to the welcome component
   function Hero() {
     return(
         <div className={"bg-hero-flowers w-full h-full bg-cover bg-center mx-auto absolute"}/>
@@ -35,7 +36,7 @@ export default function Index({searchQuery, country = {isoCode: 'US'}}: any) {
     collections && collections.length > 1 ? collections[1] : collections[0];
 
   return (
-    <Layout hero={<Hero/>} searchQuery={searchQuery}>
+    <Layout hero={<Hero/>} search={search}>
       <div className={"relative mb-64"}>
         <Welcome />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">

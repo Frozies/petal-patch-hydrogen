@@ -12,7 +12,7 @@ import {useCartUI} from './Cart/CartUIProvider.client';
 import Cart from './Cart/Cart.client';
 import { useEffect, useState } from "react";
 
-export default function Layout({children, hero, searchQuery}: any) {
+export default function Layout({children, hero, search}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
@@ -39,7 +39,7 @@ export default function Layout({children, hero, searchQuery}: any) {
         </a>
       </div>
       <div className="min-h-screen max-w-screen text-gray-700 font-sans relative">
-        <Header collections={collections} storeName={storeName} searchQuery={searchQuery}/>
+        <Header collections={collections} storeName={storeName} search={search}/>
         <div>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
           <div

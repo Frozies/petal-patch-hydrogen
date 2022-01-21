@@ -2,9 +2,10 @@ import {flattenConnection, useShopQuery} from "@shopify/hydrogen";
 
 import gql from "graphql-tag";
 import SearchClient from "./Search.client";
+import React from "react";
 
-export default function Index({ searchQuery }: any) {
-  let searchFilter = "title:*" + searchQuery + "*";
+export default function Index({ search }: any) {
+  let searchFilter = "title:*" + search + "*";
 
   const { data }: any = useShopQuery({
     query: QUERY,
@@ -24,7 +25,7 @@ export default function Index({ searchQuery }: any) {
 
   return (
     <>
-      <SearchClient/>
+      <SearchClient searchResults={products}/>
       {console.log(firstProduct)}
     </>
   );

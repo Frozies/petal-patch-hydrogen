@@ -1,13 +1,14 @@
 import {useCartLinesTotalQuantity} from '@shopify/hydrogen/client';
 
 import CartIcon from './CartIcon';
+import React from "react";
 
 export default function CartIconWithItems() {
   const itemCount = useCartLinesTotalQuantity();
 
   return (
     <>
-      <div className="relative z-50 ">
+      <div className="relative z-50 border-2 border-black/0 hover:border-black/100">
         <CartIcon />
 
         <div
