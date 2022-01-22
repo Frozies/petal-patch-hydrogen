@@ -1,25 +1,50 @@
-import { useServerState, Link } from "@shopify/hydrogen/client";
 import React, { useEffect, useRef, useState } from "react";
+import {Link} from '@shopify/hydrogen/client';
 
-export default function SearchClient(searchResults: any) {
+type searchResults = { title: any; handle: any; }
 
-  const [search, setSearch] = useState<string>();
+export default function SearchClient() {
+  const [search, setSearch] = useState<string>(); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
+  // @ts-ignore
+  const [searchResults, setSearchResults] = useState<[searchResults]>([]);
   const [overlay, toggleOverlay] = useState<boolean>(false);
-  const {setServerState, serverState} = useServerState();
 
-  useEffect(()=>{
-    console.table(serverState)
-  }, [serverState])
-
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
-    setServerState("search", search);
+    await requestProducts();
+  }
+
+  const requestProducts = async () => {
+    const response = await fetch('/api/views/SearchProducts', {
+      method: "POST",
+      headers: {
+        accept: 'application/hydrogen, application/json',
+      },
+      body: JSON.stringify({ search: search })
+    }).catch((e) => {
+      console.log("Client side error: ")
+      console.log(e)
+    })
+
+    // @ts-ignore
+    setSearchResults([]) //Clear out searchResults
+
+    // @ts-ignore
+    const products = (await response.json());
+    for(let i in await products) {
+      const newItem = {
+        title: await products[i].title,
+        handle: await products[i].handle
+      }
+      // @ts-ignore
+      setSearchResults(currentItems => [...currentItems, newItem])
+    }
   }
 
   const onChange = (e: any) => {
     e.preventDefault();
     setSearch(e.target.value)
-    // setServerState("search", e.target.value);
+    onSubmit(e);
   }
 
   
@@ -45,23 +70,29 @@ export default function SearchClient(searchResults: any) {
     toggleOverlay(false)
   };
 
-  const searchResultsBox = ({ searchResults }: any) => {
-    const itemList = searchResults.map((item: any)=> (
-      <li key={item.handle}
-          className={"hover:bg-header-pink w-full text h-full"}
-      >
-        <Link
-          to={`/products/${item.handle}`}
-          className={"px-5"}
-        >
-          {item.title}
-        </Link>
-      </li>
-    ))
+  const searchResultsBox = (results: any) => {
 
-    if (searchResults && overlay) return (
+    const itemList = (results: any) => {
+      return results.map((item: any)=> (
+        <li key={item.handle}
+            className={"hover:bg-header-pink w-full text h-full"}
+        >
+          <Link
+            to={`/products/${item.handle}`}
+            className={"px-5"}
+            onClick={()=> {
+             toggleOverlay(false)
+            }}
+          >
+            {item.title}
+          </Link>
+        </li>
+      ))
+    }
+
+    if (overlay) return (
       <ul className={`absolute bg-white h-auto text-sm text-left w-full`}>
-        {itemList}
+        {itemList(results)}
       </ul>
     )
   }

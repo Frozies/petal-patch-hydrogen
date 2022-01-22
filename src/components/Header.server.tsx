@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from '@shopify/hydrogen/client';
 
 import CartToggle from './Cart/CartToggle.client';
 import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
-import SearchServServer from './SearchProvider.server';
+import SearchClient from "./Search.client";
 
 export default function Header({collections, storeName, search}: any) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function Header({collections, storeName, search}: any) {
             >
               {storeName}
             </Link>
-            <SearchServServer search={search} />
+            <SearchClient/>
 
             <h1
               className={
