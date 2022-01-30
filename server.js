@@ -26,7 +26,7 @@ async function createServer() {
     '*',
     hydrogenMiddleware({
       getServerEntrypoint: () =>
-        require('./dist/server/entry-server.jsx').default,
+        require('./dist/server/entry-server.js').default,
       indexTemplate: indexProd,
     }),
   );

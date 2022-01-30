@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {Link} from '@shopify/hydrogen/client';
+import { Link } from "@shopify/hydrogen/client";
 
 type searchResults = { title: any; handle: any; }
 
@@ -73,7 +73,7 @@ export default function SearchClient() {
   const searchResultsBox = (results: any) => {
 
     const itemList = (results: any) => {
-      return results.map((item: any)=> (
+      if (results != undefined) return results.map((item: any)=> (
         <li key={item.handle}
             className={"hover:bg-header-pink w-full text h-full"}
         >
@@ -81,7 +81,7 @@ export default function SearchClient() {
             to={`/products/${item.handle}`}
             className={"px-5"}
             onClick={()=> {
-             toggleOverlay(false)
+              toggleOverlay(false)
             }}
           >
             {item.title}

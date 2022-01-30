@@ -30,15 +30,9 @@ export default function Layout({children, hero, search}: any) {
 
   return (
     <LocalizationProvider>
-      <div className="relative top-0 left-0">
-        <a
-          href="#mainContent"
-          className="p-4 focus:block sr-only focus:not-sr-only"
-        >
-          Skip to content
-        </a>
-      </div>
       <div className="min-h-screen max-w-screen text-gray-700 font-sans relative">
+
+        {/*Header*/}
         <Header collections={collections} storeName={storeName} search={search}/>
         <div>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
@@ -50,12 +44,29 @@ export default function Layout({children, hero, search}: any) {
           />
           <Cart />
         </div>
+
+        {/*Hero*/}
         <main role="main" id="mainContent" className="relative bg-gray-50">
           {hero}
           <div className="mx-auto max-w-7xl px-4 pt-4 pb-36 ">
             {children}
           </div>
         </main>
+
+        {/*About us*/}
+        <div className={"relative w-full h-full bg-white flex justify-center"}>
+          <div className={"w-2/3 pt-12"}>
+            <h1 className={"font-sansSerif text-2xl"}> {/*TODO Fix this font, its weird*/}
+              We here at The Petal Patch are more than just a florist we are family. We love what we do here everyday
+              and this is our happy place. Our arrangements are made with smiles and love. With more then 25 years of
+              floral design let us design the perfect bouquet for you! Whether it be an anniversary, birthday, get well,
+              event, holiday, thinking of you, new baby, new home, wedding or sympathy arrangement we got you covered!
+              Our staff is polite, super talented and we always deliver with a smile.
+            </h1>
+          </div>
+        </div>
+
+        {/*Footer*/}
         <Footer collection={collections[0]} product={products[0]} />
       </div>
     </LocalizationProvider>
