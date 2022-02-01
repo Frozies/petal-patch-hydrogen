@@ -40,7 +40,7 @@ export default function Header({collections, storeName, search}: any) {
             >
               Account
             </h1>
-            <CartToggle
+            {/*<CartToggle
               handleClick={() => {
                 if (isMobileNavOpen) setIsMobileNavOpen(false);
               }}
@@ -51,7 +51,7 @@ export default function Header({collections, storeName, search}: any) {
               >
                 Cart
               </h1>
-            </CartToggle>
+            </CartToggle>*/}
           </div>
         </div>
       </div>

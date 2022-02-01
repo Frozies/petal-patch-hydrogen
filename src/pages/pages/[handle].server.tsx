@@ -1,12 +1,11 @@
-import {useParams} from 'react-router-dom';
 import {useShopQuery, RawHtml} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
 
-export default function Page() {
-  const {handle}: any = useParams();
+export default function Page({params}: any) {
+  const {handle}: any = params;
   const {data}: any = useShopQuery({query: QUERY, variables: {handle}});
 
   if (!data.pageByHandle) {
