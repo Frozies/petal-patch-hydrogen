@@ -1,5 +1,6 @@
 import CartIcon from './Cart/CartIcon';
 import OpenIcon from './OpenIcon';
+import React from "react";
 
 export default function LoadingFallback() {
   return (

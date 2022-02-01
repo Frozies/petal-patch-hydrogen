@@ -1,33 +1,24 @@
-import {ShopifyServerProvider, DefaultRoutes} from '@shopify/hydrogen';
-import {Switch} from 'react-router-dom';
-import {Suspense} from 'react';
-
-import shopifyConfig from '../shopify.config';
+import {DefaultRoutes} from '@shopify/hydrogen';
+import React, {Suspense} from 'react';
 
 import DefaultSeo from './components/DefaultSeo.server';
 import NotFound from './components/NotFound.server';
-import CartProvider from './components/Cart/CartProvider.client';
+import AppClient from './App.client';
 import LoadingFallback from './components/LoadingFallback';
 
 export default function App({log, pages, ...serverState}: any) {
-
   return (
     <Suspense fallback={<LoadingFallback />}>
-      {/*@ts-ignore*/}
-      <ShopifyServerProvider shopifyConfig={shopifyConfig} {...serverState}>
-
-        <CartProvider>
-          <DefaultSeo />
-          <Switch>
-            <DefaultRoutes
-              pages={pages}
-              serverState={serverState}
-              fallback={<NotFound />}
-              log={log}
-            />
-          </Switch>
-        </CartProvider>
-      </ShopifyServerProvider>
+      <AppClient helmetContext={serverState.helmetContext}>
+        <DefaultSeo />
+          {/*@ts-ignore*/}
+        <DefaultRoutes
+          pages={pages}
+          serverState={serverState}
+          log={log}
+          fallback={<NotFound />}
+        />
+      </AppClient>
     </Suspense>
   );
 }
