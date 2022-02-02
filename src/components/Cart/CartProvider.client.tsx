@@ -1,8 +1,11 @@
-import {useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {CartProvider as ShopifyCartProvider} from '@shopify/hydrogen/client';
 
 import CartUIProvider, {useCartUI} from './CartUIProvider.client';
 
+/**
+ * A client component that creates a cart object and provides callbacks that can be accessed by any descendent component using the `useCart` hook and related hooks
+ */
 export default function CartProvider({children, numCartLines}: any) {
   return (
     <CartUIProvider>

@@ -1,6 +1,5 @@
 import {HelmetProvider} from '@shopify/hydrogen/client';
 // @ts-ignore
-import CartProvider from './components/cart/CartProvider.client';
 import React from "react";
 
 /**
@@ -9,7 +8,7 @@ import React from "react";
 export default function ClientApp({helmetContext, children}: any) {
   return (
     <HelmetProvider context={helmetContext}>
-      <CartProvider>{children}</CartProvider>
+      {children}
     </HelmetProvider>
   );
 }

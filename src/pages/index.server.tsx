@@ -3,12 +3,10 @@ import {
   flattenConnection,
   ProductProviderFragment,
   Image,
-  Link,
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-
+import {Suspense} from 'react';
 import Layout from '../components/Layout.server';
-import FeaturedCollection from '../components/FeaturedCollection';
 import ProductCardClient from '../components/ProductCard.client';
 import Welcome from '../components/Welcome.client';
 
@@ -39,17 +37,23 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
     <Layout hero={<Hero/>} search={search}>
       <div className={"relative mb-64"}>
         <Welcome />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
-          {featuredProducts.map((product: any) => (
-            <div key={product.id}>
-              <ProductCardClient product={product} />
-            </div>
-          ))}
-        </div>
+        <Suspense fallback={<BoxFallback />}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+            {featuredProducts.map((product: any) => (
+              <div key={product.id}>
+                <ProductCardClient product={product} />
+              </div>
+            ))}
+          </div>
+        </Suspense>
       </div>
     </Layout>
   );
 }
+
+function BoxFallback() {
+    return <div className="bg-white p-12 shadow-xl rounded-xl mb-10 h-40"></div>;
+  }
 
 const QUERY = gql`
   query indexContent(

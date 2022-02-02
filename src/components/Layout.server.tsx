@@ -33,7 +33,7 @@ export default function Layout({children, hero, search}: any) {
         {/*Header*/}
         <Suspense fallback={null}>
           <Header collections={collections} storeName={storeName} />
-          {/*<Cart />*/}
+          <Cart />
         </Suspense>
 
         {/*Hero*/}
