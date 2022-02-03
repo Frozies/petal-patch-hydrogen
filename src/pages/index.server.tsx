@@ -2,13 +2,15 @@ import {
   useShopQuery,
   flattenConnection,
   ProductProviderFragment,
-  Image,
+  Image, LocalizationProvider,
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import {Suspense} from 'react';
-import Layout from '../components/Layout.server';
 import ProductCardClient from '../components/ProductCard.client';
 import Welcome from '../components/Welcome.client';
+import Header from "../components/Header.client";
+import Cart from "../components/Cart/Cart.client";
+import Footer from "../components/Footer.client";
 
 export default function Index({search, country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
@@ -18,13 +20,6 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
     },
   });
 
-  //todo: I can move this to the welcome component
-  function Hero() {
-    return(
-        <div className={"bg-hero-flowers w-full h-full bg-cover bg-center mx-auto absolute"}/>
-    )
-  }
-
   const collections = data ? flattenConnection(data.collections) : [];
   const featuredProductsCollection: any = collections[0];
   const featuredProducts: any = featuredProductsCollection
@@ -32,22 +27,54 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
     : null;
   const featuredCollection: any =
     collections && collections.length > 1 ? collections[1] : collections[0];
+  const storeName = data ? data.shop.name : '';
+  const products: any = data ? flattenConnection(data.products) : null;
 
   return (
-    <Layout hero={<Hero/>} search={search}>
-      <div className={"relative mb-64"}>
-        <Welcome />
-        <Suspense fallback={<BoxFallback />}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
-            {featuredProducts.map((product: any) => (
-              <div key={product.id}>
-                <ProductCardClient product={product} />
+        <LocalizationProvider>
+          <div className="min-h-screen max-w-screen text-gray-700 font-sans relative">
+
+            {/*Header*/}
+            <Suspense fallback={null}>
+              <Header collections={collections} storeName={storeName} />
+              <Cart />
+            </Suspense>
+
+            <main role="main" id="mainContent" className="relative bg-gray-50">
+              <div className={"bg-hero-flowers w-full h-full bg-cover bg-center mx-auto absolute"}/>
+              <div className="mx-auto max-w-7xl px-4 pt-4 pb-36 ">
+                <div className={"relative mb-64"}>
+                  <Welcome />
+                  <Suspense fallback={<BoxFallback />}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+                      {featuredProducts.map((product: any) => (
+                          <div key={product.id}>
+                            <ProductCardClient product={product} />
+                          </div>
+                      ))}
+                    </div>
+                  </Suspense>
+                </div>
               </div>
-            ))}
+            </main>
+
+            {/*About us*/}
+            <div className={"relative w-full h-full bg-white flex justify-center"}>
+              <div className={"w-2/3 pt-12"}>
+                <h1 className={"font-sansSerif text-2xl"}> {/*TODO Fix this font, its weird*/}
+                  We here at The Petal Patch are more than just a florist we are family. We love what we do here everyday
+                  and this is our happy place. Our arrangements are made with smiles and love. With more then 25 years of
+                  floral design let us design the perfect bouquet for you! Whether it be an anniversary, birthday, get well,
+                  event, holiday, thinking of you, new baby, new home, wedding or sympathy arrangement we got you covered!
+                  Our staff is polite, super talented and we always deliver with a smile.
+                </h1>
+              </div>
+            </div>
           </div>
-        </Suspense>
-      </div>
-    </Layout>
+
+            {/*Footer*/}
+            <Footer collection={collections[0]} product={products[0]} />
+        </LocalizationProvider>
   );
 }
 
@@ -87,6 +114,17 @@ const QUERY = gql`
               }
             }
           }
+          
+        }
+      }
+    }
+    shop {
+      name
+    }
+    products(first: 1) {
+      edges {
+        node {
+          handle
         }
       }
     }

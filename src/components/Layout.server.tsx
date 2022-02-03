@@ -43,20 +43,6 @@ export default function Layout({children, hero, search}: any) {
             {children}
           </div>
         </main>
-
-        {/*About us*/}
-        <div className={"relative w-full h-full bg-white flex justify-center"}>
-          <div className={"w-2/3 pt-12"}>
-            <h1 className={"font-sansSerif text-2xl"}> {/*TODO Fix this font, its weird*/}
-              We here at The Petal Patch are more than just a florist we are family. We love what we do here everyday
-              and this is our happy place. Our arrangements are made with smiles and love. With more then 25 years of
-              floral design let us design the perfect bouquet for you! Whether it be an anniversary, birthday, get well,
-              event, holiday, thinking of you, new baby, new home, wedding or sympathy arrangement we got you covered!
-              Our staff is polite, super talented and we always deliver with a smile.
-            </h1>
-          </div>
-        </div>
-
         {/*Footer*/}
         <Footer collection={collections[0]} product={products[0]} />
       </div>
