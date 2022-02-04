@@ -5,7 +5,7 @@ import {
   Image, LocalizationProvider,
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-import {Suspense} from 'react';
+import React, {Suspense} from 'react';
 import ProductCardClient from '../components/ProductCard.client';
 import Welcome from '../components/Welcome.client';
 import Header from "../components/Header.client";
@@ -61,7 +61,7 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
             {/*About us*/}
             <div className={"relative w-full h-full bg-white flex justify-center"}>
               <div className={"w-2/3 pt-12"}>
-                <h1 className={"font-sansSerif text-2xl"}> {/*TODO Fix this font, its weird*/}
+                <h1 className={"font-roboto text-2xl"}> {/*TODO Fix this font, its weird*/}
                   We here at The Petal Patch are more than just a florist we are family. We love what we do here everyday
                   and this is our happy place. Our arrangements are made with smiles and love. With more then 25 years of
                   floral design let us design the perfect bouquet for you! Whether it be an anniversary, birthday, get well,
@@ -70,8 +70,73 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
                 </h1>
               </div>
             </div>
-          </div>
 
+            <div className={" w-full h-full bg-white flex justify-center"}>
+              <div className={'w-2/3 h-full py-12'}>
+                <Image
+                    className="
+              bg-white
+              bg-center
+              bg-cover
+              w-full
+              h-auto
+              object-center
+              object-contain
+              p-2"
+                    width={500}
+                    height={500}
+                    src={'./public/bandit.jpg'}
+                />
+              </div>
+            </div>
+
+            {/*Awards*/}
+            <div className={" w-full h-full bg-white flex justify-center"}>
+              <div className={'w-2/3 flex flex-row '}>
+                <Image
+                    className="
+              bg-white
+              h-[400px]
+              bg-center
+              bg-cover
+              object-center
+              object-contain
+              p-2"
+                    width={500}
+                    height={500}
+                    src={'./public/fortmyers_2018.jpg'}
+                />
+
+                <Image
+                    className="
+              bg-white
+              h-[400px]
+              bg-center
+              bg-cover
+              object-center
+              object-contain
+              p-2"
+                    width={500}
+                    height={500}
+                    src={'./public/gulfshore_2019.jpg'}
+                />
+
+                <Image
+                    className="
+              bg-white
+              h-[400px]
+              bg-center
+              bg-cover
+              object-center
+              object-contain
+              p-2"
+                    width={500}
+                    height={500}
+                    src={'./public/gulfshore_2020.jpeg'}
+                />
+              </div>
+            </div>
+          </div>
             {/*Footer*/}
             <Footer collection={collections[0]} product={products[0]} />
         </LocalizationProvider>

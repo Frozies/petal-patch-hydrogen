@@ -9,6 +9,7 @@ module.exports = {
     },
     fontFamily: {
       sansSerif: ['Laila', 'sans-serif'],
+      roboto: ['roboto', 'sans-serif'],
     },
     borderWidth: {
       2: '2px',
