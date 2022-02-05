@@ -62,11 +62,15 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
             <div className={"relative w-full h-full bg-white flex justify-center"}>
               <div className={"w-2/3 pt-12"}>
                 <h1 className={"font-roboto text-2xl"}> {/*TODO Fix this font, its weird*/}
-                  We here at The Petal Patch are more than just a florist we are family. We love what we do here everyday
-                  and this is our happy place. Our arrangements are made with smiles and love. With more then 25 years of
-                  floral design let us design the perfect bouquet for you! Whether it be an anniversary, birthday, get well,
-                  event, holiday, thinking of you, new baby, new home, wedding or sympathy arrangement we got you covered!
-                  Our staff is polite, super talented and we always deliver with a smile.
+                  We here at <p className={'inline font-bold'}>The Petal Patch</p> are more than just a
+                  <p className={'inline font-bold'}> florist</p> we are <p className={'inline font-bold'}>family</p>. We
+                  <p className={'inline font-bold'}> love</p> what we do here everyday and this is our happy place. Our
+                  arrangements are made with smiles and love. With more then <p className={'inline font-bold'}>25 years
+                    of floral design </p> let us <p className={'inline font-bold'}>design</p> the perfect bouquet for
+                  you! Whether it be an <p className={'inline font-bold'}>anniversary, birthday, get well, event,
+                    holiday, thinking of you, new baby, new home, wedding or sympathy</p> arrangement we got you covered
+                  ! Our staff is polite, super talented and we always <p className={'inline font-bold'}>deliver with a
+                    smile.</p>
                 </h1>
               </div>
             </div>
@@ -75,67 +79,23 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
               <div className={'w-2/3 h-full py-12'}>
                 <Image
                     className="
-              bg-white
-              bg-center
-              bg-cover
-              w-full
-              h-auto
-              object-center
-              object-contain
-              p-2"
-                    width={500}
-                    height={500}
+                      h-[600px]
+                      bg-white
+                      bg-center
+                      bg-cover
+                      w-full
+                      h-auto
+                      object-center
+                      object-contain
+                      p-2"
+                    width={864}
+                    height={648}
                     src={'./public/bandit.jpg'}
                 />
               </div>
             </div>
 
-            {/*Awards*/}
-            <div className={" w-full h-full bg-white flex justify-center"}>
-              <div className={'w-2/3 flex flex-row '}>
-                <Image
-                    className="
-              bg-white
-              h-[400px]
-              bg-center
-              bg-cover
-              object-center
-              object-contain
-              p-2"
-                    width={500}
-                    height={500}
-                    src={'./public/fortmyers_2018.jpg'}
-                />
 
-                <Image
-                    className="
-              bg-white
-              h-[400px]
-              bg-center
-              bg-cover
-              object-center
-              object-contain
-              p-2"
-                    width={500}
-                    height={500}
-                    src={'./public/gulfshore_2019.jpg'}
-                />
-
-                <Image
-                    className="
-              bg-white
-              h-[400px]
-              bg-center
-              bg-cover
-              object-center
-              object-contain
-              p-2"
-                    width={500}
-                    height={500}
-                    src={'./public/gulfshore_2020.jpeg'}
-                />
-              </div>
-            </div>
           </div>
             {/*Footer*/}
             <Footer collection={collections[0]} product={products[0]} />
