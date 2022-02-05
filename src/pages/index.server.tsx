@@ -32,7 +32,7 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
 
   return (
         <LocalizationProvider>
-          <div className="min-h-screen max-w-screen text-gray-700 font-sans relative">
+          <div className="max-w-screen min-h-screen  text-gray-700 font-sans relative">
 
             {/*Header*/}
             <Suspense fallback={null}>

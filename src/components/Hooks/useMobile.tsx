@@ -16,7 +16,7 @@ export function useMobile() {
     }
   }, []);
 
-  const isMobile = width <= 768;
+  const isMobile = width <= 1024;
 
   return isMobile;
 }

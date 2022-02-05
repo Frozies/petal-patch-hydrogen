@@ -11,7 +11,7 @@ export default function Footer({collection, product}: any) {
 
       {/*Awards*/}
       <div className={" w-full h-full bg-white flex justify-center"}>
-        <div className={'w-1/3 flex flex-row '}>
+        {/*<div className={'w-1/3 flex flex-row '}>
           <Image
             className="
               bg-white
@@ -53,7 +53,7 @@ export default function Footer({collection, product}: any) {
             height={822}
             src={'/gulfshore_2020.jpeg'}
           />
-        </div>
+        </div>*/}
       </div>
       <div className="py-6 px-4 md:px-8 bg-gray-50 flex justify-center align-middle items-center">
         <p className="text-gray-600 hover:underline hover:text-header-pink"><Link to={'http://davinyoung.com/'}

@@ -3,7 +3,7 @@ import { Link } from "@shopify/hydrogen/client";
 
 type searchResults = { title: any; handle: any; }
 
-export default function SearchClient({ className }: any) {
+export default function SearchClient({ className, isMobile }: any) {
   const [search, setSearch] = useState<string>(); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
   // @ts-ignore
   const [searchResults, setSearchResults] = useState<[searchResults]>([]);
@@ -98,7 +98,7 @@ export default function SearchClient({ className }: any) {
   }
 
   return (
-      <div className={className}>
+      <>
         <div
             id={"searchOverlay"}
             className={`z-[-1] ease-in-out transition-all duration-300 fixed w-full h-full top-0 left-0 flex items-center justify-center w-screen h-screen bg-black ${
@@ -150,6 +150,6 @@ export default function SearchClient({ className }: any) {
           </button>
 
         </form>
-      </div>
+      </>
   );
 }
