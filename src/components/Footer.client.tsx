@@ -23,7 +23,7 @@ export default function Footer({collection, product}: any) {
               p-2"
             width={635}
             height={822}
-            src={'/public/fortmyers_2018.jpg'}
+            src={'/fortmyers_2018.jpg'}
           />
 
           <Image
@@ -37,7 +37,7 @@ export default function Footer({collection, product}: any) {
               p-2"
             width={635}
             height={822}
-            src={'/public/gulfshore_2019.jpg'}
+            src={'/gulfshore_2019.jpg'}
           />
 
           <Image
@@ -51,7 +51,7 @@ export default function Footer({collection, product}: any) {
               p-2"
             width={635}
             height={822}
-            src={'/public/gulfshore_2020.jpeg'}
+            src={'/gulfshore_2020.jpeg'}
           />
         </div>
       </div>

@@ -90,7 +90,7 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
                       p-2"
                     width={864}
                     height={648}
-                    src={'./public/bandit.jpg'}
+                    src={'/bandit.jpg'}
                 />
               </div>
             </div>

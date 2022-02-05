@@ -15,6 +15,14 @@ module.exports = {
       2: '2px',
       3: '3px',
     },
+    screens: {
+      xs: '352px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       backgroundImage: {
         'hero-flowers': "url('./images/welcome.jpg')",
