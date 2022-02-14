@@ -5,18 +5,16 @@ import CartToggle from './Cart/CartToggle.client';
 import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
 import SearchClient from "./Search.client";
-import { useMobile } from "./Hooks/useMobile";
+import { useWindowSize } from "./Hooks/useWindowSize";
 
 export default function Header({collections, storeName, search}: any) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const isMobile = useMobile();
+  const {width, height} = useWindowSize();
 
   const pageHead = () => {
-    if(isMobile)
+    if(width <= 1024)
       return (
       <>
-
-
         <div
           className={`h-14 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-blue`}
         >
@@ -51,21 +49,21 @@ export default function Header({collections, storeName, search}: any) {
             "place-content-between align-middle justify-center items-center"}
         >
           <div className="h-5/6 w-full flex place-content-between align-middle justify-center items-center">
-            <SearchClient isMobile={isMobile}/>
+            <SearchClient/>
           </div>
         </div>
       </>
     )
-    if(!isMobile)
+    if(width > 1024)
     return (
       <>
         <div
-          className={`h-14 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-blue`}
+          className={`h-12 w-full border-b border-gray-200 px-6 md:px-8 mx-auto bg-header-blue`}
         >
           <div className="h-full w-full flex flex-row lg:flex-col place-content-around">
             <div className="text-center w-full flex justify-between align-middle items-center header flex-row">
               <Link
-                className="relative z-50 font-sansSerif text-4xl whitespace-nowrap font-semibold basis-50 border-2 border-black/0
+                className="relative z-50 font-sansSerif text-3xl whitespace-nowrap font-semibold basis-50 border-2 border-black/0
               hover:border-black/100"
                 to="/"
               >
