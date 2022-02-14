@@ -56,8 +56,8 @@ export default function Footer({collection, product}: any) {
         </div>*/}
       </div>
       <div className="py-6 px-4 md:px-8 bg-gray-50 flex justify-center align-middle items-center">
-        <p className="text-gray-600 hover:underline hover:text-header-pink"><Link to={'http://davinyoung.com/'}
-        target="_blank">©2017-{year} DAVINYOUNG.COM</Link></p>
+        <p className="text-gray-600 hover:underline hover:text-header-pink"><a href={'http://davinyoung.com/'}
+        target="_blank">©2017-{year} DAVINYOUNG.COM</a></p>
       </div>
     </footer>
   );
