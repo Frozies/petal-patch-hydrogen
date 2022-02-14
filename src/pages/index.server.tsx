@@ -11,6 +11,7 @@ import Welcome from '../components/Welcome.client';
 import Header from "../components/Header.client";
 import Cart from "../components/Cart/Cart.client";
 import Footer from "../components/Footer.client";
+import { useWindowSize } from "../components/Hooks/useWindowSize";
 
 export default function Index({search, country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
@@ -30,6 +31,19 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
   const storeName = data ? data.shop.name : '';
   const products: any = data ? flattenConnection(data.products) : null;
 
+  const ProductCard = () => {
+
+    return (
+      <div className="grid xs:grid-cols-3 xs:grid-rows-2 xs:gap-y-44 md:grid-cols-2 lg:grid-cols-5 lg:gap-8 mb-8">
+        {featuredProducts.map((product: any) => (
+          <div key={product.id}>
+            <ProductCardClient product={product} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
         <LocalizationProvider>
           <div className="max-w-screen min-h-screen  text-gray-700 font-sans relative">
@@ -38,21 +52,18 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
             <Suspense fallback={null}>
               <Header collections={collections} storeName={storeName} />
               <Cart />
+
             </Suspense>
 
             <main role="main" id="mainContent" className="relative bg-gray-50">
               <div className={"bg-hero-flowers w-full h-full bg-cover bg-center mx-auto absolute"}/>
               <div className="mx-auto max-w-7xl px-4 pt-4 pb-36 ">
-                <div className={"relative mb-64"}>
+                <div className={"relative mb-64 items-center justify-center align-middle"}>
                   <Welcome />
                   <Suspense fallback={<BoxFallback />}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
-                      {featuredProducts.map((product: any) => (
-                          <div key={product.id}>
-                            <ProductCardClient product={product} />
-                          </div>
-                      ))}
-                    </div>
+
+                    {ProductCard()}
+
                   </Suspense>
                 </div>
               </div>
@@ -63,14 +74,14 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
               <div className={"w-2/3 pt-12"}>
                 <h1 className={"font-roboto text-2xl"}> {/*TODO Fix this font, its weird*/}
                   We here at <p className={'inline font-bold'}>The Petal Patch</p> are more than just a
-                  <p className={'inline font-bold'}> florist</p> we are <p className={'inline font-bold'}>family</p>. We
+                  <p className={'inline font-bold'}> florist</p>, we are <p className={'inline font-bold'}>family</p>. We
                   <p className={'inline font-bold'}> love</p> what we do here everyday and this is our happy place. Our
                   arrangements are made with smiles and love. With more then <p className={'inline font-bold'}>25 years
                     of floral design </p> let us <p className={'inline font-bold'}>design</p> the perfect bouquet for
                   you! Whether it be an <p className={'inline font-bold'}>anniversary, birthday, get well, event,
-                    holiday, thinking of you, new baby, new home, wedding or sympathy</p> arrangement we got you covered
-                  ! Our staff is polite, super talented and we always <p className={'inline font-bold'}>deliver with a
-                    smile.</p>
+                    holiday, thinking of you, new baby, new home, wedding or sympathy</p> arrangement we got you
+                   covered! Our staff is polite, super talented and we always <p className={'inline font-bold'}>deliver
+                    with a smile.</p>
                 </h1>
               </div>
             </div>
@@ -104,8 +115,10 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
 }
 
 function BoxFallback() {
-    return <div className="bg-white p-12 shadow-xl rounded-xl mb-10 h-40"></div>;
-  }
+  return <div className="bg-white p-12 shadow-xl rounded-xl mb-10 h-40"></div>;
+}
+
+
 
 const QUERY = gql`
   query indexContent(
