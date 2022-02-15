@@ -20,29 +20,64 @@ export default function ProductCardClient({product}: any) {
 
   const deviceHeights = {
     iPhoneX: {
-      openHeight: 125,
-      closeHeight: 100,
-      cardWidth: 'w-52',
+      vertical: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      },
+      horizontal: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      }
     },
     surfaceDuo: {
-      openHeight: 272,
-      closeHeight: 224,
-      cardWidth: 'w-52',
+      vertical: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      },
+      horizontal: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      }
     },
     iPad: {
-      openHeight: 272,
-      closeHeight: 224,
-      cardWidth: 'w-52',
+      vertical: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      },
+      horizontal: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      }
     },
     iPadPro: {
-      openHeight: 272,
-      closeHeight: 224,
-      cardWidth: 'w-52',
+      vertical: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      },
+      horizontal: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      }
     },
     default: {
-      openHeight: 272,
-      closeHeight: 224,
-      cardWidth: "w-52",
+      vertical: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      },
+      horizontal: {
+        openHeight: 125,
+        closeHeight: 100,
+        cardWidth: 'w-52',
+      }
     }
   }
 
@@ -51,20 +86,30 @@ export default function ProductCardClient({product}: any) {
 
     Object.entries(deviceHeights).forEach((key, val)=>{
       if (key[0] == device.device) {
-        return {
-          openHeight: key[1].openHeight,
-          closeHeight: key[1].closeHeight,
-          device: key[0],
-          cardWidth: key[1].cardWidth
+        if (device.isVertical){
+          return {
+            openHeight: key[1].vertical.openHeight,
+            closeHeight: key[1].vertical.closeHeight,
+            device: key[0],
+            cardWidth: key[1].vertical.cardWidth
+          }
+        }
+        else {
+          return {
+            openHeight: key[1].horizontal.openHeight,
+            closeHeight: key[1].horizontal.closeHeight,
+            device: key[0],
+            cardWidth: key[1].horizontal.cardWidth
+          }
         }
       }
     });
 
     return {
-      openHeight: deviceHeights["default"].openHeight,
-      closeHeight: deviceHeights["default"].closeHeight,
+      openHeight: deviceHeights["default"].horizontal.openHeight,
+      closeHeight: deviceHeights["default"].horizontal.closeHeight,
       device: '720p',
-      cardWidth: deviceHeights["default"].cardWidth
+      cardWidth: deviceHeights["default"].horizontal.cardWidth
     }
   }
 
