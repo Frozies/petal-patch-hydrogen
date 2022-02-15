@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+//These are default device sizes to setup elements to match to.
 export const deviceSizes = {
   //Vertically holding phone
   'default': { width: 1280, height: 720 },
@@ -11,6 +12,9 @@ export const deviceSizes = {
 
 //todo: Test this entire file
 
+// getDevice takes an input width and height. First it compares what one is
+// bigger to check if the device is vertical or horizontal. Then iterates over
+// the deviceSizes to check if the inputs are a match or bigger than listed.
 export const getDevice = (inputWidth: number, inputHeight: number) => {
   let isVertical = false;
 
@@ -55,37 +59,11 @@ export const getDevice = (inputWidth: number, inputHeight: number) => {
     }
   })
   return prevDevice;
-/*
-  //todo: i need to figure out an interator that actually works here...
-  for(let i = 0; i in Object.entries(deviceSizes); i++) {
-    return prevDevice
-
-    /!*if(isVertical) {
-      if(inputWidth > deviceSizes[i].width) {
-        console.log('set new device: ' + i)
-        prevDevice = {
-          device: i.,
-          width: deviceSizes[i].width,
-          height: deviceSizes[i].height,
-          isVertical: isVertical
-        }
-      }
-      else return prevDevice;
-    }
-    else {
-      if(inputHeight > deviceSizes[i].width) {
-        console.log('set new device: ' + i)
-        prevDevice = {
-          device: i,
-          width: deviceSizes[i].width,
-          height: deviceSizes[i].height,
-          isVertical: isVertical
-        }
-      }
-      else return prevDevice;
-    }*!/
-  }*/
 }
+
+/**
+ * useWindowSize will return the size of a window to use in sizing other elements. This
+* */
 export function useWindowSize() {
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
