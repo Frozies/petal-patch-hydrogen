@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 export const deviceSizes = {
   //Vertically holding phone
-  default: { width: 1280, height: 720 },
-  iPhoneX: { width: 375, height: 812 },
-  surfaceDuo: { width: 540, height: 720 },
-  iPad: { width: 768, height: 1024 },
-  iPadPro: { width: 1024, height: 1366 },
+  'default': { width: 1280, height: 720 },
+  'iPhoneX': { width: 375, height: 812 },
+  'surfaceDuo': { width: 540, height: 720 },
+  'iPad': { width: 768, height: 1024 },
+  'iPadPro': { width: 1024, height: 1366 },
 }
 
 //todo: Test this entire file
@@ -27,15 +27,44 @@ export const getDevice = (inputWidth: number, inputHeight: number) => {
     isVertical: isVertical
   };
 
-  let i: keyof typeof deviceSizes
-  for(i in deviceSizes) {
-    console.log('check device: ' + i)
+  Object.entries(deviceSizes).forEach((key, val)=>{
 
     if(isVertical) {
+      if(inputWidth >= key[1].width) {
+        console.log('set new device vertical: ' + key[0])
+        prevDevice = {
+          device: key[0],
+          width: key[1].width,
+          height: key[1].height,
+          isVertical: isVertical
+        }
+      }
+      else return prevDevice;
+    }
+    else {
+      if(inputHeight >= key[1].width) {
+        console.log('set new device horizontal: ' + key[0])
+        prevDevice = {
+          device: key[0],
+          width: key[1].width,
+          height: key[1].height,
+          isVertical: isVertical
+        }
+      }
+      else return prevDevice;
+    }
+  })
+  return prevDevice;
+/*
+  //todo: i need to figure out an interator that actually works here...
+  for(let i = 0; i in Object.entries(deviceSizes); i++) {
+    return prevDevice
+
+    /!*if(isVertical) {
       if(inputWidth > deviceSizes[i].width) {
         console.log('set new device: ' + i)
         prevDevice = {
-          device: i,
+          device: i.,
           width: deviceSizes[i].width,
           height: deviceSizes[i].height,
           isVertical: isVertical
@@ -54,8 +83,8 @@ export const getDevice = (inputWidth: number, inputHeight: number) => {
         }
       }
       else return prevDevice;
-    }
-  }
+    }*!/
+  }*/
 }
 export function useWindowSize() {
   const [width, setWidth] = useState<number>(0);

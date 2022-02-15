@@ -43,7 +43,6 @@ export default function ProductCardClient({product}: any) {
 
   // if the device is defined, return the open,close, and device.
   const getCurrentDeviceElementHeights = (device: any) => {
-    console.log(device.device)
 
     let i: keyof typeof deviceHeights
     if(device.device != undefined){
