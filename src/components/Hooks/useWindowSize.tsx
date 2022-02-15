@@ -35,7 +35,6 @@ export const getDevice = (inputWidth: number, inputHeight: number) => {
 
     if(isVertical) {
       if(inputWidth >= key[1].width) {
-        console.log('set new device vertical: ' + key[0])
         prevDevice = {
           device: key[0],
           width: key[1].width,
@@ -47,7 +46,6 @@ export const getDevice = (inputWidth: number, inputHeight: number) => {
     }
     else {
       if(inputHeight >= key[1].width) {
-        console.log('set new device horizontal: ' + key[0])
         prevDevice = {
           device: key[0],
           width: key[1].width,

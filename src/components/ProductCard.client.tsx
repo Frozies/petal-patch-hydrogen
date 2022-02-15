@@ -11,7 +11,12 @@ export default function ProductCardClient({product}: any) {
   //todo: test the get device features... P4
   const [device, setDevice] = useState(getDevice(width,height));
   //todo: i think i should set the device as a serverState. this way I can pass the variable back up the chain to adjust the
-  // spacing of the banner. P4
+  // spacing of the banner.
+
+  //Update the device on width and height change.
+  useEffect(()=>  {
+    setDevice(getDevice(width,height))
+  },[width,height])
 
   const deviceHeights = {
     iPhoneX: {
@@ -44,17 +49,16 @@ export default function ProductCardClient({product}: any) {
   // if the device is defined, return the open,close, and device.
   const getCurrentDeviceElementHeights = (device: any) => {
 
-    let i: keyof typeof deviceHeights
-    if(device.device != undefined){
-      for(i in deviceHeights) {
-        if (i == device.device) return {
-          openHeight: deviceHeights[i].openHeight,
-          closeHeight: deviceHeights[i].closeHeight,
-          device: device.device,
-          cardWidth: deviceHeights[i].cardWidth
+    Object.entries(deviceHeights).forEach((key, val)=>{
+      if (key[0] == device.device) {
+        return {
+          openHeight: key[1].openHeight,
+          closeHeight: key[1].closeHeight,
+          device: key[0],
+          cardWidth: key[1].cardWidth
         }
       }
-    }
+    });
 
     return {
       openHeight: deviceHeights["default"].openHeight,
