@@ -28,6 +28,9 @@ module.exports = {
         'hero-flowers': "url('./images/welcome.jpg')",
       },
       translate: {
+        38: '9.5rem',
+        42: '10.5rem',
+        47: '11.75rem',
         58: '14.5rem',
         61: '15.25rem',
       },

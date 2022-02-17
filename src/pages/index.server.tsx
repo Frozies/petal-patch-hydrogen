@@ -5,13 +5,13 @@ import {
   Image, LocalizationProvider,
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-import React, {Suspense} from 'react';
+import React, { Suspense, useEffect, useState } from "react";
 import ProductCardClient from '../components/ProductCard.client';
 import Welcome from '../components/Welcome.client';
 import Header from "../components/Header.client";
 import Cart from "../components/Cart/Cart.client";
 import Footer from "../components/Footer.client";
-import { useWindowSize } from "../components/Hooks/useWindowSize";
+import { getDevice, useWindowSize } from "../components/Hooks/useWindowSize";
 
 export default function Index({search, country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
@@ -31,18 +31,7 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
   const storeName = data ? data.shop.name : '';
   const products: any = data ? flattenConnection(data.products) : null;
 
-  const ProductCard = () => {
 
-    return (
-      <div className="grid xs:grid-cols-3 xs:grid-rows-2 xs:gap-y-44 md:grid-cols-2 lg:grid-cols-5 lg:gap-8 mb-8">
-        {featuredProducts.map((product: any) => (
-          <div key={product.id}>
-            <ProductCardClient product={product} />
-          </div>
-        ))}
-      </div>
-    )
-  }
 
   return (
         <LocalizationProvider>
@@ -62,7 +51,7 @@ export default function Index({search, country = {isoCode: 'US'}}: any) {
                   <Welcome />
                   <Suspense fallback={<BoxFallback />}>
 
-                    {ProductCard()}
+                    <ProductCardClient featuredProducts={featuredProducts}/>
 
                   </Suspense>
                 </div>
@@ -124,7 +113,7 @@ const QUERY = gql`
   query indexContent(
     $country: CountryCode
     $numCollections: Int = 2
-    $numProducts: Int = 5
+    $numProducts: Int = 10
     $includeReferenceMetafieldDetails: Boolean = false
     $numProductMetafields: Int = 0
     $numProductVariants: Int = 250
