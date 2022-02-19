@@ -166,7 +166,7 @@ const getCurrentDeviceElementSizes = (device: any) => {
   });
 }
 
-export default function ProductCardClient ({ featuredProducts } : any) {
+export default function BannerProductCardClient ({ featuredProducts } : any) {
   const { width, height } = useWindowSize();
   const [device, setDevice] = useState(getDevice(width,height));
 

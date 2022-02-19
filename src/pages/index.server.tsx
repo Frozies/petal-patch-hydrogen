@@ -6,7 +6,7 @@ import {
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import React, { Suspense, useEffect, useState } from "react";
-import ProductCardClient from '../components/ProductCard.client';
+import BannerProductCardClient from '../components/BannerProductCard.client';
 import Welcome from '../components/Welcome.client';
 import Header from "../components/Header.client";
 import Cart from "../components/Cart/Cart.client";
@@ -51,7 +51,7 @@ export default function Index({ country = {isoCode: 'US'}}: any) {
                   <Welcome />
                   <Suspense fallback={<BoxFallback />}>
 
-                    <ProductCardClient featuredProducts={featuredProducts}/>
+                    <BannerProductCardClient featuredProducts={featuredProducts}/>
 
                   </Suspense>
                 </div>
