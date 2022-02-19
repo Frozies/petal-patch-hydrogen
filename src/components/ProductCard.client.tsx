@@ -181,7 +181,12 @@ export default function ProductCardClient ({ featuredProducts } : any) {
     setElementDevice(getCurrentDeviceElementSizes(device))
   },[device])
 
-  return (
+  if(featuredProducts == undefined) {
+    console.error('Error hydrating featured products.')
+    return (undefined)
+  }
+
+  if(featuredProducts!=undefined) return (
     <div className={`grid ${elementDevice.gridSize} mb-8`}>
       {featuredProducts.slice(0, elementDevice.productCount).map((product: any) => (
         <div key={product.id}>
@@ -206,12 +211,12 @@ function ProductCard({product, elementDevice}: any) {
         setElementSize({productHeight: elementDevice.openHeight});
       }
       setTimeOut(true)
-      setTimeout(() => {
+      /*setTimeout(() => {
         if(!timeOut) {
-          /*          setElementSize({productHeight: elementDevice.closeHeight});*/
+          setElementSize({productHeight: elementDevice.closeHeight});
         }
-      }, 1200);
-    }, 350);
+      }, 2400);*/
+    }, 500);
 
   }, [elementDevice])
 
@@ -244,11 +249,11 @@ function ProductCard({product, elementDevice}: any) {
               productHeight: elementDevice.openHeight,
             });
           }}
-          onMouseLeave={() => {
+          /*onMouseLeave={() => {
             setElementSize({
               productHeight: elementDevice.closeHeight,
             });
-          }}
+          }}*/
         >
           <AnimateHeight
             height={elementSize.productHeight}

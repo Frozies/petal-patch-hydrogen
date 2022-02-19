@@ -13,7 +13,7 @@ import Cart from "../components/Cart/Cart.client";
 import Footer from "../components/Footer.client";
 import { getDevice, useWindowSize } from "../components/Hooks/useWindowSize";
 
-export default function Index({search, country = {isoCode: 'US'}}: any) {
+export default function Index({ country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
