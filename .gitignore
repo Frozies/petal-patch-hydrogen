@@ -81,3 +81,4 @@ dist
 yarn.lock
 *.xml
 .idea/petal-patch-hydrogen.iml
+*.patch
