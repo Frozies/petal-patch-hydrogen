@@ -7,7 +7,7 @@ import { deviceSizes, getDevice, useWindowSize } from "./Hooks/useWindowSize";
 
 export default function ProductCardClient ({ featuredProducts } : any) {
   if(featuredProducts!=undefined) return (
-    <div className={`grid grid-cols-5 mb-8 gap-56`}>
+    <div className={`grid grid-cols-5 mb-8 gap-x-56 gap-y-16`}>
       {featuredProducts.map((product: any) => (
         <div key={product.id}>
           <ProductCard product={product} />
@@ -38,7 +38,7 @@ function ProductCard({product}: any) {
   return (
     <>
       <div
-        className={`text-md mb-4 absolute items-center justify-center w-44 pb-10 rounded-md border-2 border-black`}
+        className={`text-md relative items-center justify-center text-center w-44 pb-4 rounded-md border-2 border-black`}
       >
         <Link
           to={`/products/${product.handle}`}
@@ -48,7 +48,6 @@ function ProductCard({product}: any) {
             <Image
               className="
               bg-white
-              absolute
               xs:h-32
               lg:h-56
               bg-center
@@ -61,19 +60,20 @@ function ProductCard({product}: any) {
           ) : null}
 
           {/*TITLE*/}
-          <span className={`leading-4 text-black font-semibold mb-0.5 absolute w-full text-center`}>
+          <span className={`leading-4 text-black font-semibold mb-0.5 relative w-full text-center`}>
             {product.title}
           </span>
 
           {/*PRICE*/}
           {selectedVariant?.availableForSale && (
-            <div className={`flex  text-center`}>
+            <div className={`flex text-center`}>
               {selectedVariant.compareAtPriceV2 && (
                 <MoneyCompareAtPrice money={selectedVariant.compareAtPriceV2} />
               )}
               <MoneyPrice money={selectedVariant.priceV2} />
             </div>
           )}
+
           {/*OUT OF STOCK*/}
           {!selectedVariant?.availableForSale && (
             <div className={`text-black font-semibold mb-0.5 w-full text-center `}>

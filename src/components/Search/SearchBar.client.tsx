@@ -3,7 +3,7 @@ import { Link } from "@shopify/hydrogen/client";
 
 type searchResults = { title: any; handle: any; }
 
-export default function SearchClient({ className, isMobile }: any) {
+export default function SearchBarClient({ className, isMobile }: any) {
   const [search, setSearch] = useState<string>(); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
   // @ts-ignore
   const [searchResults, setSearchResults] = useState<[searchResults]>([]);
