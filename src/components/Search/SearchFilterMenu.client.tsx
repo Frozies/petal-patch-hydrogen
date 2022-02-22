@@ -25,7 +25,9 @@ export default function SearchFilterMenuClient() {
   const [filterState, setFilterState] = useState({
     productType: '',
     colors: new Array(colors.length).fill(false),
-    holidays: new Array(holidays.length).fill(false)
+    displayColors: false,
+    holidays: new Array(holidays.length).fill(false),
+    displayHolidays: false,
   })
 
   useEffect(()=>{
@@ -88,14 +90,18 @@ export default function SearchFilterMenuClient() {
             >
               <span className="font-medium text-gray-900"> Color </span>
               <span className="ml-6 flex items-center">
-                {plusSVG()}
-                {minusSVG()}
+               <button onClick={(event)=>{
+                 setFilterState({...filterState, displayColors: !filterState.displayColors })
+                 event.preventDefault()
+               }}
+               >
+                  { filterState.displayColors ? minusSVG() : plusSVG() }
+                </button>
               </span>
             </button>
           </h3>
 
-          {/*TODO: Filter section, show/hide based on section state. */}
-          <div className="pt-6" id="filter-section-0">
+          <div className="pt-6" id="filter-section-0" hidden={!filterState.displayColors}>
             <div className="space-y-4">
               {colors.map((color: { value: string; clientName: string }, index: number)=>{
                 return(
@@ -134,13 +140,18 @@ export default function SearchFilterMenuClient() {
             >
               <span className="font-medium text-gray-900"> Holidays </span>
               <span className="ml-6 flex items-center">
-                {plusSVG()}
-                {minusSVG()}
+                <button onClick={(event)=>{
+                  setFilterState({...filterState, displayHolidays: !filterState.displayHolidays })
+                  event.preventDefault()
+                }}
+                >
+                  { filterState.displayHolidays ? minusSVG() : plusSVG() }
+                </button>
               </span>
             </button>
           </h3>
           {/* Filter section, show/hide based on section state. */}
-          <div className="pt-6" id="filter-section-1">
+          <div className="pt-6" id="filter-section-1" hidden={!filterState.displayHolidays}>
             <div className="space-y-4">
               {holidays.map((holiday, index) => {
                 return(
