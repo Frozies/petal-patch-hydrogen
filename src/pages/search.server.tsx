@@ -4,7 +4,6 @@ import React from "react";
 import Layout from "../components/Layout.server";
 import BannerProductCardClient from "../components/BannerProductCard.client";
 import ProductCardClient from "../components/ProductCardClient";
-import MobileFilterMenuClient from "../components/Search/MobileFilterMenu.client";
 import SearchPageHeaderClient from "../components/Search/SearchPageHeader.client";
 import SearchFilterMenuClient from "../components/Search/SearchFilterMenu.client";
 
@@ -32,7 +31,6 @@ export default function Search({ country = {isoCode: 'US'}}: any) {
             Off-canvas filters for mobile, show/hide based on off-canvas filters state.
           */}
             <div className="fixed inset-0 flex z-40 lg:hidden" role="dialog" aria-modal="true">
-            <MobileFilterMenuClient/>
             </div>
 
             <main className=" mx-auto px-4 sm:px-6 lg:px-8">
