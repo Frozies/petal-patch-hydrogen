@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { productType } from "../../utils/productType";
 import { colors } from '../../utils/colors'
 import { holidays } from "../../utils/holidays";
-import { minusSVG } from "../UI/minusSVG";
-import { plusSVG } from "../UI/plusSVG";
+import { MinusSVG } from "../UI/minusSVG";
+import { PlusSVG } from "../UI/plusSVG";
 
 export default function SearchFilterMenuClient() {
 
@@ -95,7 +95,7 @@ export default function SearchFilterMenuClient() {
                  event.preventDefault()
                }}
                >
-                  { filterState.displayColors ? minusSVG() : plusSVG() }
+                  { filterState.displayColors ? MinusSVG() : PlusSVG() }
                 </button>
               </span>
             </button>
@@ -145,7 +145,7 @@ export default function SearchFilterMenuClient() {
                   event.preventDefault()
                 }}
                 >
-                  { filterState.displayHolidays ? minusSVG() : plusSVG() }
+                  { filterState.displayHolidays ? MinusSVG() : PlusSVG() }
                 </button>
               </span>
             </button>

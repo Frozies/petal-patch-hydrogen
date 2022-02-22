@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const minusSVG = () => {
+export const MinusSVG = () => {
   return (
     <>
       {/*
