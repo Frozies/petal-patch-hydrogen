@@ -11,16 +11,24 @@ export default function SearchBarClient({ className, isMobile }: any) {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    await requestProducts();
+    setSearch(e.target.value)
+    await requestProducts(e);
   }
 
-  const requestProducts = async () => {
+  const requestProducts = async (e: { target: { value: string; }; }) => {
+    let searchQuery;
+    if (e.target.value != search) {
+      searchQuery = e.target.value;
+    }
+    else {
+      searchQuery = search;
+    }
     const response = await fetch('/api/views/SearchProducts', {
       method: "POST",
       headers: {
         accept: 'application/hydrogen, application/json',
       },
-      body: JSON.stringify({ search: search })
+      body: JSON.stringify({ search: searchQuery })
     }).catch((e) => {
       console.log("Client side error: ")
       console.log(e)

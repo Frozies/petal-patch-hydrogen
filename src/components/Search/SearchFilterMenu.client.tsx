@@ -4,6 +4,7 @@ import { colors } from '../../utils/colors'
 import { holidays } from "../../utils/holidays";
 import { MinusSVG } from "../UI/minusSVG";
 import { PlusSVG } from "../UI/plusSVG";
+import { flowers } from "../../utils/flowers";
 
 export default function SearchFilterMenuClient() {
 
@@ -26,6 +27,8 @@ export default function SearchFilterMenuClient() {
     productType: '',
     colors: new Array(colors.length).fill(false),
     displayColors: false,
+    flowers: new Array(flowers.length).fill(false),
+    displayFlowers: false,
     holidays: new Array(holidays.length).fill(false),
     displayHolidays: false,
   })
@@ -40,6 +43,16 @@ export default function SearchFilterMenuClient() {
     );
 
     setFilterState({...filterState, colors: updatedCheckedState});
+
+    updateSearchResults()
+  };
+
+  const handleOnFlowerChange = (position: number) => {
+    const updatedCheckedState = filterState.flowers.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setFilterState({...filterState, flowers: updatedCheckedState});
 
     updateSearchResults()
   };
@@ -122,6 +135,56 @@ export default function SearchFilterMenuClient() {
                     >
                       {" "}
                       {color.clientName}{" "}
+                    </label>
+                  </div>
+                )})}
+            </div>
+          </div>
+        </div>
+        
+        <div className="border-b border-gray-200 py-6">
+          <h3 className="-my-3 flow-root">
+            {/*TODO: Expand/collapse section button */}
+            <button
+              type="button"
+              className="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500"
+              aria-controls="filter-section-0"
+              aria-expanded="false"
+            >
+              <span className="font-medium text-gray-900"> Flowers </span>
+              <span className="ml-6 flex items-center">
+               <button onClick={(event)=>{
+                 setFilterState({...filterState, displayFlowers: !filterState.displayFlowers })
+                 event.preventDefault()
+               }}
+               >
+                  { filterState.displayFlowers ? MinusSVG() : PlusSVG() }
+                </button>
+              </span>
+            </button>
+          </h3>
+
+          <div className="pt-6" id="filter-section-0" hidden={!filterState.displayFlowers}>
+            <div className="space-y-4">
+              {flowers.map((flower: { plural: string; clientName: string }, index: number)=>{
+                return(
+                  <div className="flex items-center" key={'flower-' + index}>
+                    <input
+                      id={"filter-flower-" + index}
+                      name="flower[]"
+                      value={flower.plural}
+                      type="checkbox"
+                      onChange={()=> {
+                        handleOnFlowerChange(index)
+                      }}
+                      className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <label
+                      htmlFor={"filter-flower-" + index}
+                      className="ml-3 text-sm text-gray-600"
+                    >
+                      {" "}
+                      {flower.clientName}{" "}
                     </label>
                   </div>
                 )})}

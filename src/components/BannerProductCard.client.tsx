@@ -183,7 +183,7 @@ export default function BannerProductCardClient ({ featuredProducts } : any) {
 
   if(featuredProducts == undefined) {
     console.error('Error hydrating featured products.')
-    return (undefined)
+    return (undefined) //todo: return default products
   }
 
   if(featuredProducts!=undefined) return (
