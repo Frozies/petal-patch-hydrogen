@@ -9,54 +9,13 @@ import SearchFilterMenuClient from "../components/Search/SearchFilterMenu.client
 import { colors } from "../utils/colors";
 import { flowers } from "../utils/flowers";
 import { holidays } from "../utils/holidays";
-import { useCustomState } from "../utils/customState";
+import { useServerState } from '@shopify/hydrogen/client';
 
 
-export default function Search({ country = {isoCode: 'US'}}: any) {
+export default function Search({ country = {isoCode: 'US'}, searchFilter}: any) {
 
-  let filterState = {
-    productType: '',
-    colors: new Array(colors.length).fill(false),
-    flowers: new Array(flowers.length).fill(false),
-    holidays: new Array(holidays.length).fill(false),
-  }
 
-  const handleOnColorChange = (event:ChangeEvent<HTMLInputElement>, position: number) => {
-    const updatedCheckedState = filterState.colors.map((item, index) =>
-      index === position ? !item : item
-    );
 
-    filterState = ({...filterState, colors: updatedCheckedState});
-
-    updateSearchResults()
-  };
-
-  const handleOnFlowerChange = (position: number) => {
-    const updatedCheckedState = filterState.flowers.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    filterState = ({...filterState, flowers: updatedCheckedState});
-
-    updateSearchResults()
-  };
-
-  const handleOnHolidayChange = (position: number) => {
-    const updatedCheckedState = filterState.holidays.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    filterState = ({...filterState, holidays: updatedCheckedState});
-
-    updateSearchResults()
-
-  };
-
-  const updateSearchResults = () => {
-    //todo request products with requested tags
-    console.log(filterState)
-    //iterate through the index of each enabled filter to find the correct search code and add it to the search array.
-  };
 
   const {data}: any = useShopQuery({
     query: QUERY,
@@ -67,7 +26,6 @@ export default function Search({ country = {isoCode: 'US'}}: any) {
   });
 
   const products: any = data ? flattenConnection(data.products) : null;
-
   return (
     <Layout>
       <div>
@@ -89,13 +47,16 @@ export default function Search({ country = {isoCode: 'US'}}: any) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
                   {/* Filters */}
-                  <SearchFilterMenuClient handleOnColorChange={(event: ChangeEvent<HTMLInputElement>, index: number)=> handleOnColorChange(event, index)} {...handleOnHolidayChange} {...handleOnFlowerChange}  filterState={filterState}/>
+                  <SearchFilterMenuClient />
 
                   {/* Product grid */}
                   <div className="lg:col-span-3">
                     {/* Replace with your content */}
                     <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
+                      {/*TODO: Remove this ignore*/}
+                      {/*@ts-ignore */}
                       <ProductCardClient featuredProducts={products}/>
+
                     </div>
                     {/* /End replace */}
                   </div>

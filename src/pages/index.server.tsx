@@ -50,7 +50,7 @@ export default function Index({ country = {isoCode: 'US'}}: any) {
                 <div className={"relative mb-64 items-center justify-center align-middle"}>
                   <Welcome />
                   <Suspense fallback={<BoxFallback />}>
-
+                    {/*@ts-ignore*/}
                     <BannerProductCardClient featuredProducts={featuredProducts}/>
 
                   </Suspense>

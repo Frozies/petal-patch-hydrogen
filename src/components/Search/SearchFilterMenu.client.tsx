@@ -6,8 +6,11 @@ import { MinusSVG } from "../UI/minusSVG";
 import { PlusSVG } from "../UI/plusSVG";
 import { flowers } from "../../utils/flowers";
 import { requestProducts } from "../../utils/searchUtils";
+import { useServerState } from "@shopify/hydrogen/client";
 
-export default function SearchFilterMenuClient(handleOnHolidayChange: any, handleOnFlowerChange: any, handleOnColorChange: any ) {
+export default function SearchFilterMenuClient({searchFilters}: any) {
+  const {pending, serverState, setServerState} = useServerState();
+
   //client side plus minus
   const [displayFilter, setDisplayFilter] = useState({
     displayColors: false,
@@ -28,6 +31,56 @@ export default function SearchFilterMenuClient(handleOnHolidayChange: any, handl
   * }
   *
   * */
+
+  let filterState = {
+    productType: '',
+    colors: new Array(colors.length).fill(false),
+    flowers: new Array(flowers.length).fill(false),
+    holidays: new Array(holidays.length).fill(false),
+  }
+  useEffect(()=>{
+    setServerState('searchFilter', filterState);
+    console.log(serverState)
+    console.log('serverState')
+    // console.log(searchFilters)
+  }, [ filterState, displayFilter])
+
+  const handleOnColorChange = (position: number) => {
+    const updatedCheckedState = filterState.colors.map((item, index) =>
+        index === position ? !item : item
+    );
+
+    filterState = ({...filterState, colors: updatedCheckedState});
+
+    updateSearchResults()
+  };
+
+  const handleOnFlowerChange = (position: number) => {
+    const updatedCheckedState = filterState.flowers.map((item, index) =>
+        index === position ? !item : item
+    );
+
+    filterState = ({...filterState, flowers: updatedCheckedState});
+
+    updateSearchResults()
+  };
+
+  const handleOnHolidayChange = (position: number) => {
+    const updatedCheckedState = filterState.holidays.map((item, index) =>
+        index === position ? !item : item
+    );
+
+    filterState = ({...filterState, holidays: updatedCheckedState});
+
+    updateSearchResults()
+
+  };
+
+  const updateSearchResults = () => {
+    //todo request products with requested tags
+    // console.log(searchFilters)
+    //iterate through the index of each enabled filter to find the correct search code and add it to the search array.
+  };
 
   return (
     <>
@@ -84,9 +137,8 @@ export default function SearchFilterMenuClient(handleOnHolidayChange: any, handl
                       name="color[]"
                       value={color.value}
                       type="checkbox"
-                      onChange={()=> {
-                        //onClick set bool of parent index
-                        handleOnColorChange(index);
+                      onChange={(event)=> {
+                        handleOnColorChange(index)
                       }}
                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                     />
@@ -136,7 +188,7 @@ export default function SearchFilterMenuClient(handleOnHolidayChange: any, handl
                       value={flower.plural}
                       type="checkbox"
                       onChange={()=> {
-                        handleOnFlowerChange(index)
+                        // handleOnFlowerChange(index)
                       }}
                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                     />
@@ -187,7 +239,7 @@ export default function SearchFilterMenuClient(handleOnHolidayChange: any, handl
                       type="checkbox"
                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                       onChange={()=> {
-                        handleOnHolidayChange(index)
+                        // handleOnHolidayChange(index)
                       }}
                     />
                     <label
