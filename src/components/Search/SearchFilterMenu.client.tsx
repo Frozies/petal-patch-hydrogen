@@ -5,9 +5,15 @@ import { holidays } from "../../utils/holidays";
 import { MinusSVG } from "../UI/minusSVG";
 import { PlusSVG } from "../UI/plusSVG";
 import { flowers } from "../../utils/flowers";
+import { requestProducts } from "../../utils/searchUtils";
 
-export default function SearchFilterMenuClient() {
-
+export default function SearchFilterMenuClient(handleOnHolidayChange: any, handleOnFlowerChange: any, handleOnColorChange: any ) {
+  //client side plus minus
+  const [displayFilter, setDisplayFilter] = useState({
+    displayColors: false,
+    displayFlowers: false,
+    displayHolidays: false,
+  })
 
   /*Search Filter state:
   *
@@ -23,59 +29,13 @@ export default function SearchFilterMenuClient() {
   *
   * */
 
-  const [filterState, setFilterState] = useState({
-    productType: '',
-    colors: new Array(colors.length).fill(false),
-    displayColors: false,
-    flowers: new Array(flowers.length).fill(false),
-    displayFlowers: false,
-    holidays: new Array(holidays.length).fill(false),
-    displayHolidays: false,
-  })
-
-  useEffect(()=>{
-    console.log(filterState)
-  },[filterState])
-
-  const handleOnColorChange = (position: number) => {
-    const updatedCheckedState = filterState.colors.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setFilterState({...filterState, colors: updatedCheckedState});
-
-    updateSearchResults()
-  };
-
-  const handleOnFlowerChange = (position: number) => {
-    const updatedCheckedState = filterState.flowers.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setFilterState({...filterState, flowers: updatedCheckedState});
-
-    updateSearchResults()
-  };
-
-  const handleOnHolidayChange = (position: number) => {
-    const updatedCheckedState = filterState.holidays.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setFilterState({...filterState, holidays: updatedCheckedState});
-
-    updateSearchResults()
-
-  };
-
-  const updateSearchResults = () => {};
-
-
   return (
     <>
       <form className="hidden lg:block">
         <h3 className="sr-only">Categories</h3>
-        <ul
+
+        {/*TODO fix producttype*/}
+        {/*<ul
           role="list"
           className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200"
         >
@@ -83,14 +43,14 @@ export default function SearchFilterMenuClient() {
             return (
               <li key={'product-type-' + index}>
                 <button onClick={()=>{
-                  setFilterState({...filterState, productType: prodType.tagName})
+                  setDisplayFilter({...displayFilter, productType: prodType.tagName})
                 }} >
                   {prodType.clientName}
                 </button>
               </li>
             )
           })}
-        </ul>
+        </ul>*/}
 
         <div className="border-b border-gray-200 py-6">
           <h3 className="-my-3 flow-root">
@@ -104,17 +64,17 @@ export default function SearchFilterMenuClient() {
               <span className="font-medium text-gray-900"> Color </span>
               <span className="ml-6 flex items-center">
                <button onClick={(event)=>{
-                 setFilterState({...filterState, displayColors: !filterState.displayColors })
+                 setDisplayFilter({...displayFilter, displayColors: !displayFilter.displayColors })
                  event.preventDefault()
                }}
                >
-                  { filterState.displayColors ? MinusSVG() : PlusSVG() }
+                  { displayFilter.displayColors ? MinusSVG() : PlusSVG() }
                 </button>
               </span>
             </button>
           </h3>
 
-          <div className="pt-6" id="filter-section-0" hidden={!filterState.displayColors}>
+          <div className="pt-6" id="filter-section-0" hidden={!displayFilter.displayColors}>
             <div className="space-y-4">
               {colors.map((color: { value: string; clientName: string }, index: number)=>{
                 return(
@@ -125,7 +85,8 @@ export default function SearchFilterMenuClient() {
                       value={color.value}
                       type="checkbox"
                       onChange={()=> {
-                        handleOnColorChange(index)
+                        //onClick set bool of parent index
+                        handleOnColorChange(index);
                       }}
                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                     />
@@ -154,17 +115,17 @@ export default function SearchFilterMenuClient() {
               <span className="font-medium text-gray-900"> Flowers </span>
               <span className="ml-6 flex items-center">
                <button onClick={(event)=>{
-                 setFilterState({...filterState, displayFlowers: !filterState.displayFlowers })
+                 setDisplayFilter({...displayFilter, displayFlowers: !displayFilter.displayFlowers })
                  event.preventDefault()
                }}
                >
-                  { filterState.displayFlowers ? MinusSVG() : PlusSVG() }
+                  { displayFilter.displayFlowers ? MinusSVG() : PlusSVG() }
                 </button>
               </span>
             </button>
           </h3>
 
-          <div className="pt-6" id="filter-section-0" hidden={!filterState.displayFlowers}>
+          <div className="pt-6" id="filter-section-0" hidden={!displayFilter.displayFlowers}>
             <div className="space-y-4">
               {flowers.map((flower: { plural: string; clientName: string }, index: number)=>{
                 return(
@@ -204,17 +165,17 @@ export default function SearchFilterMenuClient() {
               <span className="font-medium text-gray-900"> Holidays </span>
               <span className="ml-6 flex items-center">
                 <button onClick={(event)=>{
-                  setFilterState({...filterState, displayHolidays: !filterState.displayHolidays })
+                  setDisplayFilter({...displayFilter, displayHolidays: !displayFilter.displayHolidays })
                   event.preventDefault()
                 }}
                 >
-                  { filterState.displayHolidays ? MinusSVG() : PlusSVG() }
+                  { displayFilter.displayHolidays ? MinusSVG() : PlusSVG() }
                 </button>
               </span>
             </button>
           </h3>
           {/* Filter section, show/hide based on section state. */}
-          <div className="pt-6" id="filter-section-1" hidden={!filterState.displayHolidays}>
+          <div className="pt-6" id="filter-section-1" hidden={!displayFilter.displayHolidays}>
             <div className="space-y-4">
               {holidays.map((holiday, index) => {
                 return(

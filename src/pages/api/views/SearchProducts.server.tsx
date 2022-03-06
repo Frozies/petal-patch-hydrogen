@@ -7,6 +7,7 @@ import { colors } from "../../../utils/colors";
 import { flowers } from "../../../utils/flowers";
 import { holidays } from "../../../utils/holidays";
 import { word } from "@headlessui/react/dist/test-utils/interactions";
+import { compareSearchFilters } from "../../../utils/searchUtils";
 
 //todo: Get this dynamically
 const storeDomain = "petal-patch-hydrogen.myshopify.com/";
@@ -30,81 +31,53 @@ export async function api(request: {method: any; json: () => any} ) {
       * string.split(' ').map(word => {})
       * */
 
-      if(searchQuery.search != undefined) {
-        let colorsList: string[] = []
-        let flowersList: string[] = []
-        let holidayList: string[] = []
-        let titleList: string[] = []
+
+      let searchFilters: { colorsList: string[]; titleList: string[]; holidayList: string[]; flowersList: string[] } =
+        {colorsList: [], flowersList: [], holidayList: [], titleList: []};
+
+      //Search text
+      if(searchQuery.search != undefined || searchQuery.tags != undefined) {
 
         searchQuery.search.split(' ').map((word: string) => {
-
           word = word.toLowerCase();
-
-          /*TODO: separation of concerns. take out the filters and make them their own functions*/
-          //check if word is in colors
-          colors.filter((item)=> {
-            if(item.clientName.toLowerCase() == word){
-              colorsList.push(word)
-              return
-            }
-          })
-
-          //check if word is in flowers
-          flowers.filter((item)=> {
-            if(item.singular.toLowerCase() == word){
-              flowersList.push(word)
-              return
-            }
-            else if(item.plural.toLowerCase() == word){
-              flowersList.push(word)
-              return
-            }
-          })
-
-          //check if word is in holidays
-          holidays.filter((item)=> {
-            if(item.clientName.toLowerCase() == word){
-              holidayList.push(word)
-              return
-            }
-            else if(item.tagName.toLowerCase() == word){
-              holidayList.push(word)
-              return
-            }
-          })
-
-          titleList.push(word)
-
+          searchFilters = compareSearchFilters(word)
         })
 
-        /* Setup search filter
-        (title:Caramel Apple) OR (tag:roses) OR (tag:christmas)
-         */
-
-        for(let i in colorsList) {
-          searchFilter = searchFilter + "(tag:" + colorsList[i] + ") OR "
-        }
-
-        for(let i in flowersList) {
-          searchFilter = searchFilter + "(tag:" + flowersList[i] + ") OR "
-        }
-
-        for(let i in holidayList) {
-          searchFilter = searchFilter + "(tag:" + holidayList[i] + ") OR "
-        }
-
-        for(let i in titleList) {
-          searchFilter = searchFilter + "(title:" + titleList[i] + ") OR "
-        }
-
-        // Remove the last OR from the string to clean it up a bit.
-        let splitSearchFilter = searchFilter.split(' ');
-        if(splitSearchFilter[splitSearchFilter.length-2] == "OR") {
-          splitSearchFilter.pop()
-          splitSearchFilter.pop()
-          searchFilter = splitSearchFilter.join(' ');
-        }
+        searchQuery.tags.map((word: string) => {
+          word = word.toLowerCase();
+          searchFilters = compareSearchFilters(word);
+        })
       }
+
+      /* Setup search filter
+              (title:Caramel Apple) OR (tag:roses) OR (tag:christmas)
+               */
+
+      for(let i in searchFilters.colorsList) {
+        searchFilter = searchFilter + "(tag:" + searchFilters.colorsList[i] + ") OR "
+      }
+
+      for(let i in searchFilters.flowersList) {
+        searchFilter = searchFilter + "(tag:" + searchFilters.flowersList[i] + ") OR "
+      }
+
+      for(let i in searchFilters.holidayList) {
+        searchFilter = searchFilter + "(tag:" + searchFilters.holidayList[i] + ") OR "
+      }
+
+      for(let i in searchFilters.titleList) {
+        searchFilter = searchFilter + "(title:" + searchFilters.titleList[i] + ") OR "
+      }
+
+      // Remove the last OR from the string to clean it up a bit.
+      let splitSearchFilter = searchFilter.split(' ');
+      if(splitSearchFilter[splitSearchFilter.length-2] == "OR") {
+        splitSearchFilter.pop()
+        splitSearchFilter.pop()
+        searchFilter = splitSearchFilter.join(' ');
+      }
+
+
 
       const data = await fetchProducts(searchFilter)
 

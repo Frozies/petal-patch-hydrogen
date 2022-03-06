@@ -1,53 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "@shopify/hydrogen/client";
+import { requestProducts, searchResults } from "../../utils/searchUtils";
 
-type searchResults = { title: any; handle: any; }
 
 export default function SearchBarClient({ className, isMobile }: any) {
-  const [search, setSearch] = useState<string>(); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
-  // @ts-ignore
-  const [searchResults, setSearchResults] = useState<[searchResults]>([]);
+  const [search, setSearch] = useState<string>(''); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
+  const [searchResults, setSearchResults] = useState<searchResults>()
   const [overlay, toggleOverlay] = useState<boolean>(false);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
     setSearch(e.target.value)
-    await requestProducts(e);
-  }
+    let searchQuery = '';
 
-  const requestProducts = async (e: { target: { value: string; }; }) => {
-    let searchQuery;
     if (e.target.value != search) {
       searchQuery = e.target.value;
     }
     else {
       searchQuery = search;
     }
-    const response = await fetch('/api/views/SearchProducts', {
-      method: "POST",
-      headers: {
-        accept: 'application/hydrogen, application/json',
-      },
-      body: JSON.stringify({ search: searchQuery })
-    }).catch((e) => {
-      console.log("Client side error: ")
-      console.log(e)
-    })
 
     // @ts-ignore
-    setSearchResults([]) //Clear out searchResults
-
-    // @ts-ignore
-    const products = (await response.json());
-    for(let i in await products) {
-      const newItem = {
-        title: await products[i].title,
-        handle: await products[i].handle
-      }
-      // @ts-ignore
-      setSearchResults(currentItems => [...currentItems, newItem])
-    }
+    setSearchResults(await requestProducts(searchQuery));
   }
+
 
   const onChange = (e: any) => {
     e.preventDefault();
