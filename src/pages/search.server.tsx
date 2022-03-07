@@ -1,31 +1,14 @@
-import { useShopQuery, ProductProviderFragment, flattenConnection, Image, Money } from "@shopify/hydrogen";
+import { useShopQuery, flattenConnection, Image, Money } from "@shopify/hydrogen";
 import gql from 'graphql-tag';
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { Suspense} from "react";
 import Layout from "../components/Layout.server";
-import BannerProductCardClient from "../components/BannerProductCard.client";
-import ProductCardClient from "../components/ProductCardClient";
 import SearchPageHeaderClient from "../components/Search/SearchPageHeader.client";
 import SearchFilterMenuClient from "../components/Search/SearchFilterMenu.client";
-import { colors } from "../utils/colors";
-import { flowers } from "../utils/flowers";
-import { holidays } from "../utils/holidays";
-import { useServerState } from '@shopify/hydrogen/client';
+import { requestProducts, searchResults } from "../utils/searchUtils";
+import { ProductCardClient } from "../components/ProductCard.client";
 
+export default function Search({ country = { isoCode: 'US' }, searchFilter }: any) {
 
-export default function Search({ country = {isoCode: 'US'}, searchFilter}: any) {
-
-
-
-
-  const {data}: any = useShopQuery({
-    query: QUERY,
-    variables: {
-      country: country.isoCode,
-      query: 'red',
-    },
-  });
-
-  const products: any = data ? flattenConnection(data.products) : null;
   return (
     <Layout>
       <div>
@@ -40,28 +23,29 @@ export default function Search({ country = {isoCode: 'US'}, searchFilter}: any) 
             </div>
 
             <main className=" mx-auto px-4 sm:px-6 lg:px-8">
-              <SearchPageHeaderClient/>
+              <SearchPageHeaderClient />
 
               <section aria-labelledby="products-heading" className="pt-6 pb-24">
                 <h2 id="products-heading" className="sr-only">Products</h2>
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
                   {/* Filters */}
-                  <SearchFilterMenuClient />
+                  <SearchFilterMenuClient searchFilter={searchFilter} />
 
                   {/* Product grid */}
                   <div className="lg:col-span-3">
                     {/* Replace with your content */}
                     <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
-                      {/*TODO: Remove this ignore*/}
-                      {/*@ts-ignore */}
-                      <ProductCardClient featuredProducts={products}/>
+
+                      <Suspense fallback={<div>loading</div>}>
+                        <ProductCardClient searchFilter={searchFilter}/>
+                      </Suspense>
+
 
                     </div>
                     {/* /End replace */}
                   </div>
                 </div>
-
               </section>
             </main>
           </div>
@@ -70,6 +54,36 @@ export default function Search({ country = {isoCode: 'US'}, searchFilter}: any) 
     </Layout>
   );
 }
+
+/*export function ProductCardServer( productData: any) {
+
+  /!*return featuredProducts.then((products: any)=>{
+    console.log(products)
+    return (
+      <div className={`grid gr
+      id-cols-5 mb-8 gap-x-56 gap-y-16`}>
+        {/!*!// @ts-ignore*!/}
+        {/!*{newProducts.map((item: any)=>{
+        console.log(item)
+        return(
+          <>
+            {item.title}
+          </>
+        )
+      })}*!/}
+      </div>
+    )
+  })*!/
+  // let items: any[] = []
+  /!*featuredProducts.then((product: any) => {
+    items = product
+  })*!/
+  console.table(productData)
+  return (
+    <div>PRODUCTS</div>
+  )
+}*/
+
 const QUERY = gql`
     fragment SearchProductDetails on Product {
         id

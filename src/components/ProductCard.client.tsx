@@ -1,28 +1,48 @@
 import {Image, Link} from '@shopify/hydrogen/client';
 import React, { useEffect, useState } from "react";
-import AnimateHeight from 'react-animate-height';
 import MoneyCompareAtPrice from './MoneyCompareAtPrice.client';
 import MoneyPrice from './MoneyPrice.client';
-import { deviceSizes, getDevice, useWindowSize } from "./Hooks/useWindowSize";
+import { requestProducts, searchResults } from "../utils/searchUtils";
 
-export default function ProductCardClient ({ featuredProducts } : any) {
-  if(featuredProducts!=undefined) return (
-    <div className={`grid grid-cols-5 mb-8 gap-x-56 gap-y-16`}>
-      {featuredProducts.map((product: any) => (
-        <div key={product.id}>
-          <ProductCard product={product} />
-        </div>
-      ))}
-    </div>
-  )
+export function ProductCardClient({searchFilter}: any){
+  const [products, setProducts] = useState<searchResults[]>();
+
+  useEffect(()=>{
+    const getProducts = async ()=>{
+      // @ts-ignore
+      setProducts(await requestProducts("", searchFilter));
+    }
+    getProducts();
+  },[searchFilter])
+
+  /* const product = () => {
+     let productsArray: searchResults[] = [];
+
+     if (products != null) {
+       return products.then((items: any)=>{
+         console.log(items)
+         return <div>YES</div>
+       })
+     }
+
+     return products;
+
+   };*/
+
+  if (products!= undefined) {
+    return products.map((item: searchResults)=>{
+      return ProductCard(item)
+    })
+  }
 }
 
-function ProductCard({product}: any) {
-  const selectedVariant = product.variants.edges[0].node;
+export function ProductCard(product: searchResults) {
+
+  /*const selectedVariant = product.variants.edges[0].node;
 
   if (selectedVariant == null) {
     return null;
-  }
+  }*/
 
   /*TODO:
    * New item icon:
@@ -44,7 +64,7 @@ function ProductCard({product}: any) {
           to={`/products/${product.handle}`}
         >
           {/*IN STOCK*/}
-          {selectedVariant.image ? (
+          {/*{selectedVariant.image ? (
             <Image
               className="
               bg-white
@@ -57,7 +77,7 @@ function ProductCard({product}: any) {
               p-2"
               image={selectedVariant.image}
             />
-          ) : null}
+          ) : null}*/}
 
           {/*TITLE*/}
           <span className={`leading-4 text-black font-semibold mb-0.5 relative w-full text-center`}>
@@ -65,21 +85,21 @@ function ProductCard({product}: any) {
           </span>
 
           {/*PRICE*/}
-          {selectedVariant?.availableForSale && (
+          {/*{selectedVariant?.availableForSale && (
             <div className={`flex text-center`}>
               {selectedVariant.compareAtPriceV2 && (
                 <MoneyCompareAtPrice money={selectedVariant.compareAtPriceV2} />
               )}
               <MoneyPrice money={selectedVariant.priceV2} />
             </div>
-          )}
+          )}*/}
 
           {/*OUT OF STOCK*/}
-          {!selectedVariant?.availableForSale && (
+          {/*{!selectedVariant?.availableForSale && (
             <div className={`text-black font-semibold mb-0.5 w-full text-center `}>
               Out of stock
             </div>
-          )}
+          )}*/}
         </Link>
       </div>
     </>

@@ -17,6 +17,7 @@ export default function Index({ country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
+      tags: 'lilies',
       country: country.isoCode,
     },
   });

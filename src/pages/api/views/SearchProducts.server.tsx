@@ -1,13 +1,11 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { Money, Image, flattenConnection, graphqlRequestBody } from "@shopify/hydrogen";
-import { GraphQLConnection } from "@shopify/hydrogen/dist/esnext/types";
+import { compareSearchFilters } from "../../../utils/searchUtils";
 import { inspect } from "util";
 import { colors } from "../../../utils/colors";
 import { flowers } from "../../../utils/flowers";
 import { holidays } from "../../../utils/holidays";
-import { word } from "@headlessui/react/dist/test-utils/interactions";
-import { compareSearchFilters } from "../../../utils/searchUtils";
 
 //todo: Get this dynamically
 const storeDomain = "petal-patch-hydrogen.myshopify.com/";
@@ -16,7 +14,6 @@ const storefrontToken = "4e89e9ade6aeee978fa01f519523cdff";
 const defaultLocale = "en-us"
 
 const url = `https://${storeDomain}/api/${graphqlApiVersion}/graphql.json`;
-
 
 export async function api(request: {method: any; json: () => any} ) {
   let searchFilter = '';
@@ -43,30 +40,51 @@ export async function api(request: {method: any; json: () => any} ) {
           searchFilters = compareSearchFilters(word)
         })
 
-        searchQuery.tags.map((word: string) => {
-          word = word.toLowerCase();
-          searchFilters = compareSearchFilters(word);
-        })
+        if(searchQuery.tags !== undefined && searchQuery.tags.colors !== undefined) {
+          searchQuery.tags.colors.map((value: string, index: number)=>{
+            searchFilters.colorsList[index] = value;
+          })
+        }
+
+        if(searchQuery.tags !== undefined && searchQuery.tags.flowers !== undefined) {
+          searchQuery.tags.flowers.map((value: string, index: number)=>{
+            searchFilters.flowersList[index] = value;
+          })
+        }
+
+        if(searchQuery.tags !== undefined && searchQuery.tags.holidays !== undefined) {
+          searchQuery.tags.holidays.map((value: string, index: number)=>{
+            searchFilters.holidayList[index] = value;
+          })
+        }
       }
 
       /* Setup search filter
               (title:Caramel Apple) OR (tag:roses) OR (tag:christmas)
                */
 
+      for(let i in searchFilters.titleList) {
+        if (searchFilters.titleList[i]) {
+          searchFilter = searchFilter + "(title:" + searchFilters.titleList[i] + ") AND "
+        }
+      }
+
       for(let i in searchFilters.colorsList) {
-        searchFilter = searchFilter + "(tag:" + searchFilters.colorsList[i] + ") OR "
+        if (searchFilters.colorsList[i]) {
+          searchFilter = searchFilter + "(tag:" + colors[i].value + ") OR "
+        }
       }
 
       for(let i in searchFilters.flowersList) {
-        searchFilter = searchFilter + "(tag:" + searchFilters.flowersList[i] + ") OR "
+        if (searchFilters.flowersList[i]){
+          searchFilter = searchFilter + "(tag:" + flowers[i].plural + ") OR "
+        }
       }
 
       for(let i in searchFilters.holidayList) {
-        searchFilter = searchFilter + "(tag:" + searchFilters.holidayList[i] + ") OR "
-      }
-
-      for(let i in searchFilters.titleList) {
-        searchFilter = searchFilter + "(title:" + searchFilters.titleList[i] + ") OR "
+        if (searchFilters.holidayList[i]) {
+          searchFilter = searchFilter + "(tag:" + holidays[i].tagName + ") OR "
+        }
       }
 
       // Remove the last OR from the string to clean it up a bit.
@@ -77,7 +95,8 @@ export async function api(request: {method: any; json: () => any} ) {
         searchFilter = splitSearchFilter.join(' ');
       }
 
-
+      console.log("SEARCH")
+      console.log(searchFilter)
 
       const data = await fetchProducts(searchFilter)
 

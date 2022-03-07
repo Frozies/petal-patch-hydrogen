@@ -5,31 +5,35 @@ import { holidays } from "./holidays";
 export type searchResults = { title: any; handle: any; }
 
 export const requestProducts = async (searchQuery?: string, searchTags?: [string]) => {
-  let searchResults: searchResults[] = [];
+  if (searchQuery != undefined || searchTags != undefined) {
+    let searchResults: searchResults[] = [];
 
-  const response = await fetch('/api/views/SearchProducts', {
-    method: "POST",
-    headers: {
-      accept: 'application/hydrogen, application/json',
-    },
-    body: JSON.stringify({ search: searchQuery, tags: searchTags })
-  }).catch((e) => {
-    console.log("Client side error: ")
-    console.log(e)
-  })
+    const response = await fetch('http://localhost:3000/api/views/SearchProducts', {
+      method: "POST",
+      headers: {
+        accept: 'application/hydrogen, application/json',
+      },
+      body: JSON.stringify({ search: searchQuery, tags: searchTags })
+    }).catch((e) => {
+      console.log("Client side error: ")
+      console.log(e)
+    })
 
-  // @ts-ignore
-  const products = (await response.json());
-  for(let i in await products) {
-    const newItem = {
-      title: await products[i].title,
-      handle: await products[i].handle
+    if (response) {
+      const products = (await response.json());
+      for(let i in await products) {
+        const newItem = {
+          title: await products[i].title,
+          handle: await products[i].handle
+        }
+
+        searchResults.push(newItem)
+      }
     }
 
-    searchResults.push(newItem)
-  }
 
-  return searchResults;
+    return searchResults;
+  }
 }
 
 export const compareSearchFilters = (word: string) => {

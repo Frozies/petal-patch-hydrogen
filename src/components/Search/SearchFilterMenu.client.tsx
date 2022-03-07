@@ -5,17 +5,23 @@ import { holidays } from "../../utils/holidays";
 import { MinusSVG } from "../UI/minusSVG";
 import { PlusSVG } from "../UI/plusSVG";
 import { flowers } from "../../utils/flowers";
-import { requestProducts } from "../../utils/searchUtils";
 import { useServerState } from "@shopify/hydrogen/client";
 
-export default function SearchFilterMenuClient({searchFilters}: any) {
-  const {pending, serverState, setServerState} = useServerState();
+export default function SearchFilterMenuClient({searchFilter}: any) {
+  const {serverState, setServerState } = useServerState();
 
   //client side plus minus
   const [displayFilter, setDisplayFilter] = useState({
     displayColors: false,
     displayFlowers: false,
     displayHolidays: false,
+  })
+
+  const [filterState, setFilterState] = useState({
+    productType: '',
+    colors: new Array(colors.length).fill(false),
+    flowers: new Array(flowers.length).fill(false),
+    holidays: new Array(holidays.length).fill(false),
   })
 
   /*Search Filter state:
@@ -32,55 +38,33 @@ export default function SearchFilterMenuClient({searchFilters}: any) {
   *
   * */
 
-  let filterState = {
-    productType: '',
-    colors: new Array(colors.length).fill(false),
-    flowers: new Array(flowers.length).fill(false),
-    holidays: new Array(holidays.length).fill(false),
-  }
-  useEffect(()=>{
-    setServerState('searchFilter', filterState);
-    console.log(serverState)
-    console.log('serverState')
-    // console.log(searchFilters)
-  }, [ filterState, displayFilter])
-
   const handleOnColorChange = (position: number) => {
     const updatedCheckedState = filterState.colors.map((item, index) =>
-        index === position ? !item : item
+      index === position ? !item : item
     );
 
-    filterState = ({...filterState, colors: updatedCheckedState});
-
-    updateSearchResults()
+    setFilterState({...filterState, colors: updatedCheckedState});
+    setServerState('searchFilter', {...filterState, colors: updatedCheckedState});
   };
 
   const handleOnFlowerChange = (position: number) => {
     const updatedCheckedState = filterState.flowers.map((item, index) =>
-        index === position ? !item : item
+      index === position ? !item : item
     );
 
-    filterState = ({...filterState, flowers: updatedCheckedState});
-
-    updateSearchResults()
+    setFilterState({...filterState, flowers: updatedCheckedState});
+    setServerState('searchFilter', {...filterState, flowers: updatedCheckedState});
   };
 
-  const handleOnHolidayChange = (position: number) => {
+  const handleOnHolidaysChange = (position: number) => {
     const updatedCheckedState = filterState.holidays.map((item, index) =>
-        index === position ? !item : item
+      index === position ? !item : item
     );
 
-    filterState = ({...filterState, holidays: updatedCheckedState});
-
-    updateSearchResults()
-
+    setFilterState({...filterState, holidays: updatedCheckedState});
+    setServerState('searchFilter', {...filterState, holidays: updatedCheckedState});
   };
 
-  const updateSearchResults = () => {
-    //todo request products with requested tags
-    // console.log(searchFilters)
-    //iterate through the index of each enabled filter to find the correct search code and add it to the search array.
-  };
 
   return (
     <>
@@ -188,7 +172,7 @@ export default function SearchFilterMenuClient({searchFilters}: any) {
                       value={flower.plural}
                       type="checkbox"
                       onChange={()=> {
-                        // handleOnFlowerChange(index)
+                        handleOnFlowerChange(index)
                       }}
                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                     />
@@ -239,7 +223,7 @@ export default function SearchFilterMenuClient({searchFilters}: any) {
                       type="checkbox"
                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                       onChange={()=> {
-                        // handleOnHolidayChange(index)
+                        handleOnHolidaysChange(index)
                       }}
                     />
                     <label

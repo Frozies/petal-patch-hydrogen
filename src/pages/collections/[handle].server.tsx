@@ -22,6 +22,7 @@ export default function Collection({
     query: QUERY,
     variables: {
       handle,
+
       country: country.isoCode,
       numProducts: collectionProductCount,
     },
@@ -34,6 +35,7 @@ export default function Collection({
   const collection = data.collection;
   const products: any = flattenConnection(collection.products);
   const hasNextPage = data.collection.products.pageInfo.hasNextPage;
+
 
   return (
     <Layout>
@@ -48,6 +50,7 @@ export default function Collection({
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {products.map((product: any) => (
           <li key={product.id}>
+            {/*// @ts-ignore*/}
             <BannerProductCardClient product={product} />
           </li>
         ))}
