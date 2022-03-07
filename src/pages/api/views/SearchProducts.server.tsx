@@ -138,6 +138,10 @@ const QUERY = gql`
         id
         title
         handle
+        featuredImage{
+            url
+        }
+        availableForSale
         variants(first: 5) {
             edges {
                 node {

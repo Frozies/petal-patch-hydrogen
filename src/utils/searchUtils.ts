@@ -2,7 +2,14 @@ import { colors } from "./colors";
 import { flowers } from "./flowers";
 import { holidays } from "./holidays";
 
-export type searchResults = { title: any; handle: any; }
+export type searchResults = {
+  title: any;
+  handle: any;
+  image: any;
+  availableForSale: any;
+  compareAtPriceV2: any;
+  priceV2: any;
+}
 
 export const requestProducts = async (searchQuery?: string, searchTags?: [string]) => {
   if (searchQuery != undefined || searchTags != undefined) {
@@ -24,7 +31,11 @@ export const requestProducts = async (searchQuery?: string, searchTags?: [string
       for(let i in await products) {
         const newItem = {
           title: await products[i].title,
-          handle: await products[i].handle
+          handle: await products[i].handle,
+          image: await products[i].featuredImage,
+          availableForSale: await products[i].availableForSale,
+          compareAtPriceV2: await products[i].variants.edges[0].node.compareAtPriceV2,
+          priceV2: await products[i].variants.edges[0].node.priceV2,
         }
 
         searchResults.push(newItem)

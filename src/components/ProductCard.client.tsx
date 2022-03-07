@@ -36,20 +36,14 @@ export function ProductCardClient({searchFilter}: any){
   }
 }
 
-export function ProductCard(product: searchResults) {
-
-  /*const selectedVariant = product.variants.edges[0].node;
-
-  if (selectedVariant == null) {
-    return null;
-  }*/
+function ProductCard(product: searchResults) {
 
   /*TODO:
    * New item icon:
-   * selectedVariant.publishedAt
+   * product.publishedAt
    *
    * Discounted item icon:
-   * selectedVariant.compareAtPriceV2
+   * product.compareAtPriceV2
    *
    * Top Seller Icon:
    *
@@ -64,7 +58,7 @@ export function ProductCard(product: searchResults) {
           to={`/products/${product.handle}`}
         >
           {/*IN STOCK*/}
-          {/*{selectedVariant.image ? (
+          {product.image ? (
             <Image
               className="
               bg-white
@@ -75,9 +69,9 @@ export function ProductCard(product: searchResults) {
               object-center
               object-contain
               p-2"
-              image={selectedVariant.image}
+              image={product.image}
             />
-          ) : null}*/}
+          ) : null}
 
           {/*TITLE*/}
           <span className={`leading-4 text-black font-semibold mb-0.5 relative w-full text-center`}>
@@ -85,21 +79,21 @@ export function ProductCard(product: searchResults) {
           </span>
 
           {/*PRICE*/}
-          {/*{selectedVariant?.availableForSale && (
+          {product?.availableForSale && (
             <div className={`flex text-center`}>
-              {selectedVariant.compareAtPriceV2 && (
-                <MoneyCompareAtPrice money={selectedVariant.compareAtPriceV2} />
+              {product.compareAtPriceV2 && (
+                <MoneyCompareAtPrice money={product.compareAtPriceV2} />
               )}
-              <MoneyPrice money={selectedVariant.priceV2} />
+              <MoneyPrice money={product.priceV2} />
             </div>
-          )}*/}
+          )}
 
           {/*OUT OF STOCK*/}
-          {/*{!selectedVariant?.availableForSale && (
+          {!product?.availableForSale && (
             <div className={`text-black font-semibold mb-0.5 w-full text-center `}>
               Out of stock
             </div>
-          )}*/}
+          )}
         </Link>
       </div>
     </>
