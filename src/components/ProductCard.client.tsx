@@ -34,6 +34,7 @@ export function ProductCardClient({searchFilter}: any){
       return ProductCard(item)
     })
   }
+  else return (<div> LOADING... </div>)
 }
 
 function ProductCard(product: searchResults) {
