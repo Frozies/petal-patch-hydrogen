@@ -15,7 +15,7 @@ export const requestProducts = async (searchQuery?: string, searchTags?: [string
   if (searchQuery != undefined || searchTags != undefined) {
     let searchResults: searchResults[] = [];
 
-    const response = await fetch('http://localhost:3000/api/views/SearchProducts', {
+    const response = await fetch('/api/views/SearchProducts', {
       method: "POST",
       headers: {
         accept: 'application/hydrogen, application/json',
