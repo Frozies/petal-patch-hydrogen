@@ -20,7 +20,7 @@ export const requestProducts = async (searchQuery?: string, searchTags?: [string
       headers: {
         accept: 'application/hydrogen, application/json',
       },
-      body: JSON.stringify({ search: searchQuery, tags: searchTags })
+      body: JSON.stringify({ searchQuery: searchQuery, tags: searchTags })
     }).catch((e) => {
       console.log("Client side error: ")
       console.log(e)

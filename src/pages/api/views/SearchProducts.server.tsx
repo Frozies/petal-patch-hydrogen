@@ -33,11 +33,14 @@ export async function api(request: {method: any; json: () => any} ) {
         {colorsList: [], flowersList: [], holidayList: [], titleList: []};
 
       //Search text
-      if(searchQuery.search != undefined || searchQuery.tags != undefined) {
+      if(searchQuery.searchQuery != undefined || searchQuery.tags != undefined) {
 
-        searchQuery.search.split(' ').map((word: string) => {
+        //todo: Do i really need to seperate each title word out? ill leave it for now...
+        searchQuery.searchQuery.split(' ').map((word: string) => {
           word = word.toLowerCase();
-          searchFilters = compareSearchFilters(word)
+          let filteredWords = compareSearchFilters(word);
+
+          searchFilters.titleList.push(...filteredWords.titleList)
         })
 
         if(searchQuery.tags !== undefined && searchQuery.tags.colors !== undefined) {
@@ -60,42 +63,52 @@ export async function api(request: {method: any; json: () => any} ) {
       }
 
       /* Setup search filter
-              (title:Caramel Apple) OR (tag:roses) OR (tag:christmas)
+              (title:Caramel Apple) OR (tag:*roses) OR (tag:*christmas)
                */
 
+        //todo: Do i really need to seperate each title word out? ill leave it for now...
       for(let i in searchFilters.titleList) {
         if (searchFilters.titleList[i]) {
-          searchFilter = searchFilter + "(title:" + searchFilters.titleList[i] + ") AND "
+          searchFilter = searchFilter + "(title:*" + searchFilters.titleList[i] + "*) AND "
         }
       }
 
       for(let i in searchFilters.colorsList) {
         if (searchFilters.colorsList[i]) {
-          searchFilter = searchFilter + "(tag:" + colors[i].value + ") OR "
+          searchFilter = searchFilter + "(tag:*" + colors[i].value + "*) AND "
         }
       }
 
       for(let i in searchFilters.flowersList) {
         if (searchFilters.flowersList[i]){
-          searchFilter = searchFilter + "(tag:" + flowers[i].plural + ") OR "
+          searchFilter = searchFilter + "(tag:*" + flowers[i].plural + "*) AND "
         }
       }
 
       for(let i in searchFilters.holidayList) {
         if (searchFilters.holidayList[i]) {
-          searchFilter = searchFilter + "(tag:" + holidays[i].tagName + ") OR "
+          searchFilter = searchFilter + "(tag:*" + holidays[i].tagName + "*) AND "
         }
       }
 
-      // Remove the last OR from the string to clean it up a bit.
+      // Remove the last OR or AND from the string to clean it up a bit. Pop the last 2 elements.
       let splitSearchFilter = searchFilter.split(' ');
-      if(splitSearchFilter[splitSearchFilter.length-2] == "OR") {
+
+      if(splitSearchFilter[splitSearchFilter.length-4] == "AND" ) {
         splitSearchFilter.pop()
         splitSearchFilter.pop()
+
         searchFilter = splitSearchFilter.join(' ');
       }
 
-      console.log("SEARCH")
+      if(splitSearchFilter[splitSearchFilter.length-3] == "OR") {
+
+        splitSearchFilter.pop()
+        splitSearchFilter.pop()
+
+        searchFilter = splitSearchFilter.join(' ');
+      }
+
       console.log(searchFilter)
 
       const data = await fetchProducts(searchFilter)

@@ -44,7 +44,7 @@ export default function SearchFilterMenuClient({searchFilter}: any) {
     );
 
     setFilterState({...filterState, colors: updatedCheckedState});
-    setServerState('searchFilter', {...filterState, colors: updatedCheckedState});
+    setServerState('searchFilter.tags', {...filterState, colors: updatedCheckedState});
   };
 
   const handleOnFlowerChange = (position: number) => {
@@ -53,7 +53,7 @@ export default function SearchFilterMenuClient({searchFilter}: any) {
     );
 
     setFilterState({...filterState, flowers: updatedCheckedState});
-    setServerState('searchFilter', {...filterState, flowers: updatedCheckedState});
+    setServerState('searchFilter.tags', {...filterState, flowers: updatedCheckedState});
   };
 
   const handleOnHolidaysChange = (position: number) => {
@@ -62,7 +62,7 @@ export default function SearchFilterMenuClient({searchFilter}: any) {
     );
 
     setFilterState({...filterState, holidays: updatedCheckedState});
-    setServerState('searchFilter', {...filterState, holidays: updatedCheckedState});
+    setServerState('searchFilter.tags', {...filterState, holidays: updatedCheckedState});
   };
 
 
