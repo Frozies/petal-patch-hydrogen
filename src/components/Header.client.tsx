@@ -4,7 +4,7 @@ import {Link} from '@shopify/hydrogen/client';
 import CartToggle from './Cart/CartToggle.client';
 import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
-import SearchClient from "./Search.client";
+import SearchBarClient from "./Search/SearchBar.client";
 import { useWindowSize } from "./Hooks/useWindowSize";
 
 export default function Header({collections, storeName, search}: any) {
@@ -49,7 +49,7 @@ export default function Header({collections, storeName, search}: any) {
             "place-content-between align-middle justify-center items-center"}
         >
           <div className="h-5/6 w-full flex place-content-between align-middle justify-center items-center">
-            <SearchClient/>
+            <SearchBarClient/>
           </div>
         </div>
       </>
@@ -69,7 +69,7 @@ export default function Header({collections, storeName, search}: any) {
               >
                 {storeName}
               </Link>
-              <SearchClient/>
+              <SearchBarClient/>
 
               <h1
                 className={

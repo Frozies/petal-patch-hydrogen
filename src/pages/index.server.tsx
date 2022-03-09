@@ -6,7 +6,7 @@ import {
 } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import React, { Suspense, useEffect, useState } from "react";
-import ProductCardClient from '../components/ProductCard.client';
+import BannerProductCardClient from '../components/BannerProductCard.client';
 import Welcome from '../components/Welcome.client';
 import Header from "../components/Header.client";
 import Cart from "../components/Cart/Cart.client";
@@ -17,6 +17,7 @@ export default function Index({ country = {isoCode: 'US'}}: any) {
   const {data}: any = useShopQuery({
     query: QUERY,
     variables: {
+      tags: 'lilies',
       country: country.isoCode,
     },
   });
@@ -50,8 +51,8 @@ export default function Index({ country = {isoCode: 'US'}}: any) {
                 <div className={"relative mb-64 items-center justify-center align-middle"}>
                   <Welcome />
                   <Suspense fallback={<BoxFallback />}>
-
-                    <ProductCardClient featuredProducts={featuredProducts}/>
+                    {/*@ts-ignore*/}
+                    <BannerProductCardClient featuredProducts={featuredProducts}/>
 
                   </Suspense>
                 </div>
