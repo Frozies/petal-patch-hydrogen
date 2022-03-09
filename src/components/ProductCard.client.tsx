@@ -30,9 +30,10 @@ export function ProductCardClient({searchFilter}: any){
    };*/
 
   if (products!= undefined) {
-    return products.map((item: searchResults)=>{
+    if( products.length != 0) return products.map((item: searchResults)=>{
       return ProductCard(item)
     })
+    else return (<div>Sorry, we couldn't find any products like that...</div>)
   }
   else return (<div> LOADING... </div>)
 }
