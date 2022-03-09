@@ -7,12 +7,22 @@ import { requestProducts, searchResults } from "../utils/searchUtils";
 export function ProductCardClient({searchFilter}: any){
   const [products, setProducts] = useState<searchResults[]>();
 
+  //auto update products as searchFilter gets updated.
   useEffect(()=>{
-    const getProducts = async ()=>{
-      // @ts-ignore
-      setProducts(await requestProducts("", searchFilter));
+    if (searchFilter!=undefined) {
+      const getProducts = async ()=>{
+        // @ts-ignore
+        setProducts(await requestProducts(searchFilter.searchQuery, searchFilter.tags));
+      }
+      getProducts();
     }
-    getProducts();
+    else {
+      const getProducts = async ()=>{
+        // @ts-ignore
+        setProducts(await requestProducts('', ''));
+      }
+      getProducts();
+    }
   },[searchFilter])
 
   /* const product = () => {
