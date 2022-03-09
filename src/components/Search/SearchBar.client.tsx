@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "@shopify/hydrogen/client";
+import { Link, useServerState, useNavigate } from "@shopify/hydrogen/client";
 import { requestProducts, searchResults } from "../../utils/searchUtils";
+import { Redirect } from "react-router-dom";
 
 
 export default function SearchBarClient({ className, isMobile }: any) {
   const [search, setSearch] = useState<string>(''); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
+  const {serverState, setServerState } = useServerState();
+  const navigate = useNavigate();
+
   const [searchResults, setSearchResults] = useState<searchResults>()
   const [overlay, toggleOverlay] = useState<boolean>(false);
 
@@ -20,15 +24,35 @@ export default function SearchBarClient({ className, isMobile }: any) {
       searchQuery = search;
     }
 
+    //set server state for searchpage use, not needed for modal popup.
+    setServerState('searchFilter.searchQuery', {searchQuery: searchQuery});
+
     // @ts-ignore
     setSearchResults(await requestProducts(searchQuery));
+
+    navigate('/search', {replace: true});
+
   }
 
 
-  const onChange = (e: any) => {
+  const onChange = async (e: any) => {
     e.preventDefault();
     setSearch(e.target.value)
-    onSubmit(e);
+
+    let searchQuery = '';
+
+    if (e.target.value != search) {
+      searchQuery = e.target.value;
+    }
+    else {
+      searchQuery = search;
+    }
+
+    //set server state for searchpage use, not needed for modal popup.
+    setServerState('searchFilter', {searchQuery: searchQuery});
+
+    // @ts-ignore
+    setSearchResults(await requestProducts(searchQuery));
   }
 
   
