@@ -20,11 +20,14 @@ import {Suspense} from 'react';
 
 export default function Index({country = {isoCode: 'US'}}) {
   return (
-    <Layout hero={<GradientBackground />}>
+    <Layout>
+      
       <Suspense fallback={null}>
         <SeoForHomepage />
-      </Suspense>
-      <div className="relative mb-12">
+      </Suspense> 
+      
+      {/*Default homepage stuff*/}
+      {/*<div className="relative mb-12">
         <Welcome />
         <Suspense fallback={<BoxFallback />}>
           <FeaturedProductsBox country={country} />
@@ -32,7 +35,7 @@ export default function Index({country = {isoCode: 'US'}}) {
         <Suspense fallback={<BoxFallback />}>
           <FeaturedCollectionBox country={country} />
         </Suspense>
-      </div>
+      </div>*/}
     </Layout>
   );
 }
@@ -59,6 +62,7 @@ function SeoForHomepage() {
   );
 }
 
+/*Loading box for when waiting for products*/
 function BoxFallback() {
   return <div className="bg-white p-12 shadow-xl rounded-xl mb-10 h-40"></div>;
 }

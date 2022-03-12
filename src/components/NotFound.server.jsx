@@ -88,6 +88,5 @@ const QUERY = gql`
       }
     }
   }
-
   ${ProductProviderFragment}
 `;
