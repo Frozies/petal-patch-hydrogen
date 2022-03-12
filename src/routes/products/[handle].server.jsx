@@ -24,7 +24,7 @@ export default function Product({country = {isoCode: 'US'}, params}) {
   });
 
   if (!product) {
-    return <NotFound />;
+    return (<NotFound />);
   }
 
   return (
