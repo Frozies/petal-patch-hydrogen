@@ -1,0 +1,16 @@
+name = "PETAL_PATCH"
+type = "javascript"
+account_id = "c52b7d66bb07440dc32603488e5ac042"
+workers_dev = true
+route = "hydrogen.petal-patch.workers.dev"
+zone_id = ""
+compatibility_date = "2022-01-28"
+compatibility_flags = ["streams_enable_constructors"]
+
+[site]
+bucket = "dist/client"
+entry-point = "dist/worker"
+
+[build]
+upload.format = "service-worker"
+command = "yarn && yarn build"
