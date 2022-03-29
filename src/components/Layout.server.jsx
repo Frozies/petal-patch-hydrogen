@@ -4,7 +4,6 @@ import {
   LocalizationProvider,
   CacheHours,
 } from '@shopify/hydrogen';
-import {ImageFragment} from '@shopify/hydrogen/fragments';
 import gql from 'graphql-tag';
 
 import Header from './Header.client';
@@ -30,21 +29,19 @@ export default function Layout({children}) {
 
   return (
     <LocalizationProvider preload="*">
-      
       <div className="min-h-screen max-w-screen text-gray-700 font-sans">
-      
         <Suspense fallback={null}>
           <Header storeName={storeName} />
           <Cart />
         </Suspense>
-        
+
         <main role="main" id="mainContent" className="relative bg-gray-50">
           <div className="mx-auto max-w-7xl p-4 md:py-5 md:px-8">
             {children}
           </div>
         </main>
-        
-        <Footer/>
+
+        <Footer />
       </div>
     </LocalizationProvider>
   );
@@ -63,7 +60,11 @@ const QUERY = gql`
           id
           title
           image {
-            ...ImageFragment
+            id
+            url
+            altText
+            width
+            height
           }
         }
       }
@@ -76,5 +77,4 @@ const QUERY = gql`
       }
     }
   }
-  ${ImageFragment}
 `;

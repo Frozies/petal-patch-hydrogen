@@ -25,7 +25,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'hero-flowers': "url('./images/welcome.jpg')",
+        'hero-flowers': "url('/welcome.jpg')",
       },
       translate: {
         38: '9.5rem',
