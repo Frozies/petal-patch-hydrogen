@@ -1,6 +1,5 @@
 import {Image, Link} from '@shopify/hydrogen/client';
 import React, { useEffect, useState } from "react";
-import AnimateHeight from 'react-animate-height';
 import MoneyCompareAtPrice from './MoneyCompareAtPrice.client';
 import MoneyPrice from './MoneyPrice.client';
 import { deviceSizes, getDevice, useWindowSize } from "./Hooks/useWindowSize";
@@ -255,8 +254,7 @@ function ProductCard({product, elementDevice}: any) {
             });
           }}*/
         >
-          <AnimateHeight
-            height={elementSize.productHeight}
+          <div
             className={`rounded-lg border border-b bg-white mb-2 relative object-cover w-auto`}
           >
             {/*IN STOCK*/}
@@ -272,7 +270,7 @@ function ProductCard({product, elementDevice}: any) {
               object-center
               object-contain
               p-2"
-                image={selectedVariant.image}
+                data={selectedVariant.image}
               />
             ) : null}
 
@@ -296,7 +294,7 @@ function ProductCard({product, elementDevice}: any) {
                 Out of stock
               </div>
             )}
-          </AnimateHeight>
+          </div>
         </Link>
       </div>
     </>

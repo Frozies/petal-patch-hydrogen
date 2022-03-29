@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useServerState, useNavigate } from "@shopify/hydrogen/client";
+import { Link, useNavigate, useServerState } from "@shopify/hydrogen/client";
 import { requestProducts, searchResults } from "../../utils/searchUtils";
-import { Redirect } from "react-router-dom";
 
 
 export default function SearchBarClient({ className, isMobile }: any) {
   const [search, setSearch] = useState<string>(''); //TODO: IMPORTANT ESCAPE THIS VALUE ON SENDING TO SERVER!!!!!
   const {serverState, setServerState } = useServerState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate(); todo  fix use navigat in searchbar
 
   const [searchResults, setSearchResults] = useState<searchResults>()
   const [overlay, toggleOverlay] = useState<boolean>(false);
@@ -30,7 +29,7 @@ export default function SearchBarClient({ className, isMobile }: any) {
     // @ts-ignore
     setSearchResults(await requestProducts(searchQuery));
 
-    navigate('/search', {replace: true});
+    // navigate('/search', {replace: true});
 
   }
 
@@ -55,7 +54,6 @@ export default function SearchBarClient({ className, isMobile }: any) {
     setSearchResults(await requestProducts(searchQuery));
   }
 
-  
   /*Focus on searchbar on click into.*/
   let ref:any = useRef();
   useEffect(() => {

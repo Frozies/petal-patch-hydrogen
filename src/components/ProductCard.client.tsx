@@ -25,6 +25,7 @@ export function ProductCardClient({searchFilter}: any){
     }
   },[searchFilter])
 
+  /*todo: write why this was commented out*/
   /* const product = () => {
      let productsArray: searchResults[] = [];
 
@@ -41,73 +42,61 @@ export function ProductCardClient({searchFilter}: any){
 
   if (products!= undefined) {
     if( products.length != 0) return products.map((item: searchResults)=>{
-      return ProductCard(item)
+      if(item!=undefined) return <ProductCard product={item}/>
     })
     else return (<div>Sorry, we couldn't find any products like that...</div>)
   }
   else return (<div> LOADING... </div>)
 }
 
-function ProductCard(product: searchResults) {
 
-  /*TODO:
-   * New item icon:
-   * product.publishedAt
-   *
-   * Discounted item icon:
-   * product.compareAtPriceV2
-   *
-   * Top Seller Icon:
-   *
-   * Show then hide product card for initial load in.
-   * */
+/*########################################################*/
+
+
+
+
+
+/**
+ * A shared component that displays a single product to allow buyers to quickly identify a particular item of interest
+ */
+export default function ProductCard({product}: any) {
+
+  if (product == null) {
+    return null;
+  }
+
   return (
-    <>
-      <div
-        className={`text-md relative items-center justify-center text-center w-44 pb-4 rounded-md border-2 border-black`}
-      >
-        <Link
-          to={`/products/${product.handle}`}
-        >
-          {/*IN STOCK*/}
-          {product.image ? (
-            <Image
-              className="
-              bg-white
-              xs:h-32
-              lg:h-56
-              bg-center
-              bg-cover
-              object-center
-              object-contain
-              p-2"
-              image={product.image}
-            />
-          ) : null}
+      <div className="text-md mb-4 relative">
+        <Link to={`/products/${product.handle}`}>
+          <div className="rounded-lg border-2 border-gray-200 mb-2 relative flex items-center justify-center overflow-hidden object-cover h-96">
+            {product.image ? (
+                <Image
+                    className="bg-white absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-contain hover:scale-110"
+                    data={product.image}
+                />
+            ) : null}
+            {!product?.availableForSale && (
+                <div className="absolute top-3 left-3 rounded-3xl text-xs bg-black text-white py-3 px-4">
+                  Out of stock
+                </div>
+            )}
+          </div>
 
-          {/*TITLE*/}
-          <span className={`leading-4 text-black font-semibold mb-0.5 relative w-full text-center`}>
-            {product.title}
-          </span>
+          <span className="text-black font-semibold mb-0.5">{product.title}</span>
 
-          {/*PRICE*/}
-          {product?.availableForSale && (
-            <div className={`flex text-center`}>
-              {product.compareAtPriceV2 && (
+          {product.vendor && (
+              <p className="text-gray-900 font-medium text-sm mb-0.5">
+                {product.vendor}
+              </p>
+          )}
+
+          <div className="flex ">
+            {product.compareAtPriceV2 && (
                 <MoneyCompareAtPrice money={product.compareAtPriceV2} />
-              )}
-              <MoneyPrice money={product.priceV2} />
-            </div>
-          )}
-
-          {/*OUT OF STOCK*/}
-          {!product?.availableForSale && (
-            <div className={`text-black font-semibold mb-0.5 w-full text-center `}>
-              Out of stock
-            </div>
-          )}
+            )}
+            <MoneyPrice money={product.priceV2} />
+          </div>
         </Link>
       </div>
-    </>
   );
 }
