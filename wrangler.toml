@@ -16,4 +16,4 @@ upload.format = "service-worker"
 command = "yarn && yarn build"
 
 [env]
-NODE_VERSION = 16.14.2
+NODE_VERSION = 16.14
