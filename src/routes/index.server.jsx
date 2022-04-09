@@ -235,8 +235,12 @@ const SEO_QUERY = gql`
 `;
 
 const QUERY = gql`
-  query indexContent($country: CountryCode, $language: LanguageCode)
-  @inContext(country: $country, language: $language) {
+  query indexContent(
+    $country: CountryCode
+    $language: LanguageCode
+    $numCollections: Int = 2
+    $numProducts: Int = 10
+  ) @inContext(country: $country, language: $language) {
     collections(first: $numCollections) {
       edges {
         node {

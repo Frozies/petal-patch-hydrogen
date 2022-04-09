@@ -24,6 +24,8 @@ describe('index', () => {
     expect(heading).not.toBeNull();
 
     const text = await heading.textContent();
-    expect(text).toBe('Hello, Hydrogen');
+    console.log(text)
+
+    expect(text).toBe('Petal Patch');
   }, 60000);
 });

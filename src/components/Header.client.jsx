@@ -5,7 +5,7 @@ import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
 import SearchBarClient from './Search/SearchBar.client';
 import {useWindowSize} from './Hooks/useWindowSize';
-import CartToggle from "./CartToggle.client";
+import CartToggle from './CartToggle.client';
 
 export default function Header({collections, storeName, search}) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -30,7 +30,14 @@ export default function Header({collections, storeName, search}) {
               hover:border-black/100"
                   to="/"
                 >
-                  {storeName}
+                  <h1
+                    className={
+                      'relative z-50 font-sansSerif text-3xl w-full font-semibold whitespace-nowrap basis-50 border-2 border-black/0\n' +
+                      '              hover:border-black/100'
+                    }
+                  >
+                    {storeName}
+                  </h1>
                 </Link>
 
                 <CartToggle

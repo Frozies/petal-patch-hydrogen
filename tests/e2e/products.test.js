@@ -24,6 +24,8 @@ describe('products', () => {
     expect(heading).not.toBeNull();
 
     const text = await heading.textContent();
+    console.log(text)
+
     expect(text).toBe('The Hydrogen');
   }, 60000);
 });
