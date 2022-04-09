@@ -1,4 +1,4 @@
-name = "PETAL_PATCH"
+name = "petal_patch"
 type = "javascript"
 account_id = "c52b7d66bb07440dc32603488e5ac042"
 workers_dev = true
