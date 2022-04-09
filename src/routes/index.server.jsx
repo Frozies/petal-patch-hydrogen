@@ -5,6 +5,7 @@ import {
   Seo,
   CacheDays,
   Image,
+  useShop,
   LocalizationProvider,
 } from '@shopify/hydrogen';
 
@@ -151,10 +152,13 @@ function BoxFallback() {
 }
 
 function FeaturedProductsBox({country}) {
+  const {languageCode} = useShop();
+
   const {data} = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,
+      language: languageCode,
     },
     preload: true,
   });
@@ -204,10 +208,13 @@ function FeaturedProductsBox({country}) {
 }
 
 function FeaturedCollectionBox({country}) {
+  const {languageCode} = useShop();
+
   const {data} = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,
+      language: languageCode,
     },
     preload: true,
   });
@@ -230,9 +237,10 @@ const SEO_QUERY = gql`
 const QUERY = gql`
   query indexContent(
     $country: CountryCode
+    $language: LanguageCode
     $numCollections: Int = 2
     $numProducts: Int = 10
-  ) @inContext(country: $country) {
+  ) @inContext(country: $country, language: $language) {
     collections(first: $numCollections) {
       edges {
         node {
