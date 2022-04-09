@@ -15,5 +15,5 @@ entry-point = "dist/worker"
 upload.format = "service-worker"
 command = "yarn && yarn build"
 
-[env]
+[vars]
 NODE_VERSION = "16.14.2"
