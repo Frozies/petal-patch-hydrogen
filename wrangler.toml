@@ -7,6 +7,9 @@ zone_id = ""
 compatibility_date = "2022-01-28"
 compatibility_flags = ["streams_enable_constructors"]
 
+[env.production]
+NODE_VERSION = "v16.14.2"
+
 [site]
 bucket = "dist/client"
 entry-point = "dist/worker"
@@ -15,5 +18,3 @@ entry-point = "dist/worker"
 upload.format = "service-worker"
 command = "yarn && yarn build"
 
-[vars]
-NODE_VERSION = "v16.14.2"
