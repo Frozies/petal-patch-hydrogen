@@ -32,7 +32,9 @@ export default function ProductOptions() {
                     />
                     <div
                       className={`p-2 border cursor-pointer rounded text-sm md:text-md ${
-                        checked ? 'bg-gray-900 text-white' : 'text-gray-900'
+                        checked
+                          ? 'bg-gray-900 text-header-blue'
+                          : 'text-gray-900'
                       }`}
                     >
                       {value}

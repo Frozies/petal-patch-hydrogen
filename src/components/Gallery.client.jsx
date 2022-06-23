@@ -26,7 +26,7 @@ export default function Gallery() {
 
   return (
     <div
-      className="gap-4 flex md:grid md:grid-cols-2 overflow-x-scroll no-scrollbar scroll-snap-x scroll-smooth h-[485px] md:h-auto place-content-start"
+      className="-z-50 gap-4 flex md:grid md:grid-cols-2 overflow-x-scroll no-scrollbar scroll-snap-x scroll-smooth h-[485px] md:h-auto place-content-start"
       tabIndex="-1"
     >
       <Image
